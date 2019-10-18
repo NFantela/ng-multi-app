@@ -1,0 +1,19 @@
+@import '../utilities/index.scss';
+
+.card{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $white;
+    background-clip: border-box;
+    border: 1px solid palette(grey, x-dark);
+    border-radius: .25rem;
+    &__body{
+        flex: 1 1 auto;
+        padding: em(14px);
+    }
+}

@@ -1,0 +1,17 @@
+// ==========================================================================
+// Grid display
+// ==========================================================================
+
+.is-displayed-mobile {
+  @include mq(small) {
+    display: block;
+    @at-root (with: media) { // @at-root will place its content at root level not nested
+      .is-hidden-mobile {
+        display: none;
+      }
+    }
+  }
+  @include mq(medium) {
+    display: none;
+  }	
+}
