@@ -16,17 +16,21 @@ import { reducers } from './store/core/reducers';
 import { environment } from 'src/environments/environment';
 
 const ROUTES: Routes = [
-  { path: '', pathMatch: 'full', component: AppComponent},
+  { path: '', pathMatch: 'full', component: HomeComponent},
 ];
 
 // containers
 import { AppComponent } from './core/containers/app/app.component';
+import { HomeComponent } from './core/containers/home/home.component';
+
 // other modules
 import { DemoAdminModule } from './demo-admin/demo-admin.module';
+import { AngularCalendarModule } from 'lib/angular-calendar/angular.calendar.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,8 @@ import { DemoAdminModule } from './demo-admin/demo-admin.module';
       name: 'NgRx Store DevTools',
       logOnly: environment.production
     }),
-    DemoAdminModule
+    DemoAdminModule,
+    AngularCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
