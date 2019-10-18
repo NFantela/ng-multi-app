@@ -1,14 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './core/components/app/app.component';
+
+// ngrx store
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { storeFreeze } from 'ngrx-store-freeze';
+// ngrx store declarations & local imports
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
+import { reducers } from './store/core/reducers';
+
+import { environment } from 'src/environments/environment';
+
+const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', component: AppComponent},
+];
+
+// containers
+import { AppComponent } from './core/containers/app/app.component';
+// other modules
+import { DemoAdminModule } from './demo-admin/demo-admin.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(ROUTES),
+    StoreModule.forRoot(reducers, { metaReducers }),
+  //  EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Store DevTools',
+      logOnly: environment.production
+    }),
+    DemoAdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
