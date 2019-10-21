@@ -1,0 +1,27 @@
+// CONFIG
+// Descriptive Base Colors
+$white : #fff;
+$black : #0b0b0b;
+$grey  : #797e83;
+
+// Color Palette Modifiers
+$color-palettes: (
+	grey: (
+		xx-light : lighten($grey, 43%),
+		x-light  : lighten($grey, 35%),
+	  light    : lighten($grey, 12%),
+	  base     : $grey,
+	 	dark     : darken($grey, 8%),
+	 	x-dark   : darken($grey, 16%)
+	),
+	black: (
+		light    : lighten($black, 10%),
+		base     : $black,
+		dark     : darken($black, 10%)
+	)
+);
+// functions
+// Call the color palette modifiers in color values
+@function palette($palette, $shade: 'base') {
+    @return map-get(map-get($color-palettes, $palette), $shade);
+}

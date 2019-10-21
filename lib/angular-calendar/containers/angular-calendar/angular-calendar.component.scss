@@ -1,0 +1,20 @@
+@import '../../shared/scss/calendar.config';
+
+.angular-calendar{
+    &__header{
+        & > ul {
+            display:flex;
+            justify-content: center;
+            li {
+                cursor:pointer;
+                padding:1em;
+                &:hover{
+                    opacity: .6;
+                }
+            }
+        }
+    }
+    &__date, &__calendar{
+        background:$white;
+    }
+}
