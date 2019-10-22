@@ -8,6 +8,7 @@
             li {
                 cursor:pointer;
                 padding:1em;
+                text-transform: uppercase;
                 &:hover{
                     opacity: .6;
                 }
@@ -16,5 +17,15 @@
     }
     &__date, &__calendar{
         background:$white;
+    }
+    &__date{
+        display:flex;
+        .heading-container{
+            flex-grow: 1;
+            text-align: center;
+        }
+    }
+    footer{
+        text-align: center;
     }
 }
