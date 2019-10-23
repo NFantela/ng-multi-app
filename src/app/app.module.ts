@@ -26,6 +26,7 @@ import { HomeComponent } from './core/containers/home/home.component';
 // other modules
 import { DemoAdminModule } from './demo-admin/demo-admin.module';
 import { AngularCalendarModule } from 'lib/angular-calendar/angular.calendar.module';
+import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-calendar.config';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,18 @@ import { AngularCalendarModule } from 'lib/angular-calendar/angular.calendar.mod
     DemoAdminModule,
     AngularCalendarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ANGULAR_CALENDAR_CONFIG,
+      useValue: {
+        labels : {
+          daily : 'daily',
+          weekly: 'weekly',
+          monthly : 'monthly',
+      }
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

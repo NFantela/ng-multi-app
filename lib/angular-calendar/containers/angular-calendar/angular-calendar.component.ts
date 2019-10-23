@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional } from '@angular/core';
+import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 
 export class AngularCalendarDateChange{
     constructor(
@@ -18,7 +19,10 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
 })
 export class AngularCalendarComponent {
 
-    constructor() {
+    constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _config : AngularCalendarConfig) {
+        if(this._config){
+          this.timespanLabels = {...this.timespanLabels, ...this._config.labels}
+        }
     }
 
   /* ====== INPUTS ======== */
@@ -28,7 +32,11 @@ export class AngularCalendarComponent {
   /* Color used for primary elements e.g. arrows */
   @Input() primaryColor:string = '#114a9f';
 
-  @Input() timespansLabels : [string, string, string] = [ 'daily', 'weekly', 'monthly'];
+  timespanLabels =  {
+    daily : 'daily',
+    weekly:  'weekly',
+    monthly : 'monthly'
+  }
 
   /** The date to open the calendar to initially. */
   @Input()
@@ -54,6 +62,10 @@ export class AngularCalendarComponent {
     } else {
 
     }
+  }
+
+  changeCurrentDateView(i:number){
+    console.log(i);
   }
 
 }

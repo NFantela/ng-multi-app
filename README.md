@@ -13,3 +13,15 @@
 
 # 2.1 Calendar body
 -- try to make it as a table with different cellse BUT REMEMBER ng Template passed
+
+ -- take note:
+    - component can be used as a directive e.g. <tbody mat-calendar-body>
+-- logic
+    calendar-component 
+        week-view-component
+            - table with tbody + calendar-body component used as directive
+        month-view-component
+            - table with tbody + calendar-body component used as directive
+        day-view-component
+            - table with tbody + calendar-body component used as directive        
+
