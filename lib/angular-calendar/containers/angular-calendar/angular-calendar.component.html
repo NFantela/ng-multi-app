@@ -1,7 +1,10 @@
 <section class="angular-calendar">
+    {{ dateData$ | async | json }}
     <header class="angular-calendar__header">
         <ul>
-            <li> {{ timespanLabels.daily }} </li> <li> {{ timespanLabels.weekly }} </li> <li> {{ timespanLabels.monthly }} </li>
+            <li (click)="changeTimespan('day')"> {{ timespanLabels.daily }} </li> 
+            <li (click)="changeTimespan('week')"> {{ timespanLabels.weekly }} </li> 
+            <li (click)="changeTimespan('month')"> {{ timespanLabels.monthly }} </li>
         </ul>
     </header>
     <div class="angular-calendar__date">
@@ -30,8 +33,11 @@
          
     </div>
     <div class="angular-calendar__calendar">
-        Calendar includes will be here 
-        <ng-container *ngTemplateOutlet="dayTemplate"></ng-container>
+        <p>Calendar includes will be here </p>
+        <monthly-view></monthly-view>
+        <div>
+            <ng-container *ngTemplateOutlet="dayTemplate"></ng-container>
+        </div>
     </div>
     <footer>
         <ng-content select="angular-calendar-footer"></ng-content>

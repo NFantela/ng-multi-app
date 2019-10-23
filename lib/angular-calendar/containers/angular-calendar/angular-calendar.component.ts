@@ -1,10 +1,18 @@
-import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit } from '@angular/core';
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-export class AngularCalendarDateChange{
+interface AngularDateConfig  {
+   startDate: Date;
+   endDate:Date;
+   timespan:AngularCalendarTimeSpan
+}
+
+export class AngularCalendarDateChange implements  AngularDateConfig{
     constructor(
-      public startDate: string,
-      public endDate:string,
+      public startDate: Date,
+      public endDate:Date,
       public timespan:AngularCalendarTimeSpan
       ) {}
 }
@@ -17,7 +25,7 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
     templateUrl: 'angular-calendar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AngularCalendarComponent {
+export class AngularCalendarComponent implements OnDestroy, OnInit{
 
     constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _config : AngularCalendarConfig) {
         if(this._config){
@@ -25,10 +33,13 @@ export class AngularCalendarComponent {
         }
     }
 
-  /* ====== INPUTS ======== */
+    /* Main date config Subject */
+    dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
+    dateData$ = this.dateData.asObservable().pipe(tap(console.log));
 
+  /* ====== INPUTS ================ */
   /** Set the start view or default */
-  @Input() startView: AngularCalendarTimeSpan  = 'month';
+  @Input() selectedView: AngularCalendarTimeSpan  = 'month';
   /* Color used for primary elements e.g. arrows */
   @Input() primaryColor:string = '#114a9f';
 
@@ -40,32 +51,75 @@ export class AngularCalendarComponent {
 
   /** The date to open the calendar to initially. */
   @Input()
-  get startDay(): Date | null {
-    return this._startDay;
+  get startAtDay(): Date | null {
+    return this._startAtDay;
   }
-  set startDay(value: Date | null) {
-    this.startDay = value || new Date();
+  set startAtDay(value: Date | null) {
+    this._startAtDay = isNaN(Date.parse(value.toDateString()))  ? new Date()  : value;
   }
-  private _startDay: Date | null;
+  private _startAtDay: Date = new Date();
 
-    /* ====== OUTPUTs ======== */
+  /* ====== OUTPUTS ================ */
   @Output()
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
+  ngOnInit(){
+    this._createStartEndDates(this.startAtDay);
+  }
+
+  ngOnDestroy(){
+    this.dateData.complete();
+  }
+
   @ContentChild(TemplateRef, {static:false}) dayTemplate: TemplateRef<any>;
+
+  /* depending on current selectedView calculate start and end dates for that time period */
+  private _createStartEndDates(date:Date){
+    let startDate:Date;
+    let endDate:Date;
+    const year = date.getFullYear();
+    // months are 0 based
+    const month = date.getMonth();
+    switch (this.selectedView) {
+      case 'month':{
+        const lastDayOfTheMonth = new Date(year, month + 1, 0).getDate();
+         startDate = new Date(year, month);
+         endDate = new Date(year, month, lastDayOfTheMonth);
+      }
+      break;
+      case 'week':{
+        const difference = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
+        startDate = new Date(year, month, difference);
+        endDate = new Date (year, month, difference + 6)
+      }
+      break;
+      case 'day':{
+        startDate = new Date(date);
+        endDate = startDate;
+      }
+      break;
+    }
+    this.dateData.next({
+      startDate,
+      endDate,
+      timespan: this.selectedView
+    })
+  }
+
+
 
   handleDateChange(changeType: 'prev' |  'next'){
     // TODO
     // TODOOOO
     if(changeType === 'prev'){
-        this.calendarDateChange.emit(new AngularCalendarDateChange("01-12", "31-12", "day"))
+       // this.calendarDateChange.emit(new AngularCalendarDateChange("01-12", "31-12", "day"))
     } else {
 
     }
   }
-
-  changeCurrentDateView(i:number){
-    console.log(i);
+  /* On timespan label click set new timespan and recalculate dates */
+  changeTimespan(e:AngularCalendarTimeSpan){
+    this.selectedView = e;
+    this._createStartEndDates(this.startAtDay);
   }
-
 }
