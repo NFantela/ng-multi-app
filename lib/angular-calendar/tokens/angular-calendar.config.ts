@@ -5,6 +5,15 @@ export interface AngularCalendarConfig {
         daily : string;
         weekly: string;
         monthly : string;
+        weekDays: [
+            {monday: string;},
+            {tuesday: string;},
+            {wednesday: string;},
+            {thursday: string;},
+            {friday: string;},
+            {saturday: string;},
+            {sunday: string;}
+        ]
     }
 }
 

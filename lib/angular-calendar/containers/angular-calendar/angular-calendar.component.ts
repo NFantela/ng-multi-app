@@ -3,7 +3,7 @@ import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-cale
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-interface AngularDateConfig  {
+export interface AngularDateConfig  {
    startDate: Date;
    endDate:Date;
    timespan:AngularCalendarTimeSpan

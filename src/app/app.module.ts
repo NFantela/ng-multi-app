@@ -54,6 +54,15 @@ import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-cal
           daily : 'daily',
           weekly: 'weekly',
           monthly : 'monthly',
+          weekDays: [
+            {monday: 'Mon'},
+            {tuesday: 'Tue'},
+            {wednesday: 'Wed'},
+            {thursday: 'Thu'},
+            {friday: 'Fri'},
+            {saturday: 'Sat'},
+            {sunday: 'Sun'}
+        ]
       }
       }
     }

@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { AngularDateConfig } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
     selector: 'monthly-view',
@@ -7,4 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class MonthlyViewComponent {
     constructor() {}
+
+    @Input()
+    dateInformation:AngularDateConfig;
 }

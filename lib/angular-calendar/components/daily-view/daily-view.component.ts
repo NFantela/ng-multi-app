@@ -1,10 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { AngularDateConfig } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
     selector: 'daily-view',
-    template : 'daily-view.component.html',
+    templateUrl : 'daily-view.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyViewComponent {
     constructor() {}
+
+    @Input()
+    dateInformation:AngularDateConfig;
 }

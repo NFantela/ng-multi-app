@@ -32,12 +32,27 @@
         </button>
          
     </div>
-    <div class="angular-calendar__calendar">
-        <p>Calendar includes will be here </p>
-        <monthly-view></monthly-view>
-        <div>
-            <ng-container *ngTemplateOutlet="dayTemplate"></ng-container>
+    <div class="angular-calendar__calendar" *ngIf="dateData$ | async as dateData">
+        <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
+
+                <monthly-view
+                    [dateInformation]="dateData"
+                    *ngSwitchCase="'month'">
+                </monthly-view>
+                <weekly-view
+                    [dateInformation]="dateData"
+                    *ngSwitchCase="'week'">
+                </weekly-view>
+                <daily-view
+                    [dateInformation]="dateData"
+                    *ngSwitchCase="'day'">
+                </daily-view>
+
+                <div>
+                    <ng-container *ngTemplateOutlet="dayTemplate"></ng-container>
+                </div>
         </div>
+
     </div>
     <footer>
         <ng-content select="angular-calendar-footer"></ng-content>
