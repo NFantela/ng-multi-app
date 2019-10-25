@@ -29,7 +29,18 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
 
     constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _config : AngularCalendarConfig) {
         if(this._config){
+          /* grab data from config or set defaults */
           this.timespanLabels = {...this.timespanLabels, ...this._config.labels}
+          const weekDays = this._config.labels.weekDays || [
+            {monday: 'Mon'},
+            {tuesday: 'Tue'},
+            {wednesday: 'Wed'},
+            {thursday: 'Thu'},
+            {friday: 'Fri'},
+            {saturday: 'Sat'},
+            {sunday: 'Sun'}
+          ];
+          this.weekDays = Object.keys(weekDays).map(key => weekDays[key]);
         }
     }
 
@@ -37,17 +48,35 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
     dateData$ = this.dateData.asObservable().pipe(tap(console.log));
 
+    timespanLabels =  {
+      daily : 'daily',
+      weekly:  'weekly',
+      monthly : 'monthly'
+    }
+    weekDays: string [];
+
+    // current day
+    today = new Date();
+
+    get isLastTimespan():boolean{
+      const lastDayInSelect = this.dateData.getValue().endDate;
+      const today = this.today;
+      return this._isCurrentGreaterThanToday(lastDayInSelect, today);
+    }
+
   /* ====== INPUTS ================ */
   /** Set the start view or default */
-  @Input() selectedView: AngularCalendarTimeSpan  = 'month';
+  @Input() 
+  set selectedView(v: AngularCalendarTimeSpan ){
+    if(v && v === 'day' || v === 'month' || v === 'week' ){
+      this._selectedView = v;
+    } 
+  } 
+  get selectedView(){return this._selectedView;}
+  _selectedView:AngularCalendarTimeSpan = 'month';
+
   /* Color used for primary elements e.g. arrows */
   @Input() primaryColor:string = '#114a9f';
-
-  timespanLabels =  {
-    daily : 'daily',
-    weekly:  'weekly',
-    monthly : 'monthly'
-  }
 
   /** The date to open the calendar to initially. */
   @Input()
@@ -59,11 +88,13 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   }
   private _startAtDay: Date = new Date();
 
+
   /* ====== OUTPUTS ================ */
   @Output()
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
   ngOnInit(){
+    console.log(this.weekDays);
     this._createStartEndDates(this.startAtDay);
   }
 
@@ -112,9 +143,14 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     // TODO
     // TODOOOO
     if(changeType === 'prev'){
+        // need to get the correct date depending on the current selectedView
+        // mind the year flops
+        // then use _createStartEndDates(date)
        // this.calendarDateChange.emit(new AngularCalendarDateChange("01-12", "31-12", "day"))
     } else {
+      if(!this.isLastTimespan){
 
+      }
     }
   }
   /* On timespan label click set new timespan and recalculate dates */
@@ -122,4 +158,34 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     this.selectedView = e;
     this._createStartEndDates(this.startAtDay);
   }
+
+  private _isCurrentGreaterThanToday(lastDay:Date, today:Date):boolean{
+    if(lastDay && today){
+      const lastDayYear = lastDay.getFullYear();
+      const lastDayMonth = lastDay.getMonth();
+      const lastDayDay = lastDay.getDate(); 
+
+      const todayYear = today.getFullYear();
+      const todayMonth = today.getMonth();
+      const todayDay = today.getDate();
+        // shortcut on year
+        if(lastDayYear < todayYear){
+          return false;
+        }
+        if(lastDayYear == todayYear){
+           // exit on month
+          if(lastDayMonth < todayMonth){
+            return false;
+          }
+          if(lastDayMonth == todayMonth){
+            // check days
+            if(lastDayDay < todayDay){
+              return false;
+            } 
+          }
+        }
+        return true;
+    }
+  }
+
 }

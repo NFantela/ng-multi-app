@@ -27,6 +27,7 @@
             type="button"
             class="btn next"
             [style.color]="primaryColor"
+            [disabled]="isLastTimespan"
             (click)="handleDateChange('next')">
                 >
         </button>
