@@ -15,13 +15,13 @@ import { InjectionToken } from "@angular/core";
 
 export class AngularCalendarConfig {
 
-  timespanLabels : {
-    daily : 'daily'
-    weekly: 'weekly'
+  timespanLabels = {
+    daily : 'daily',
+    weekly: 'weekly',
     monthly : 'monthly'
   }
 
-  weekDayLabels: [
+  weekDayLabels = [
     {monday: 'monday'},
     {tuesday: 'tuesday'},
     {wednesday: 'wednesday'},

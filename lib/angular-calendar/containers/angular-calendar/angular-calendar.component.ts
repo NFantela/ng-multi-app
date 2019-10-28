@@ -80,6 +80,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
   ngOnInit(){
+    console.log(this.configOptions)
     this._createStartEndDates(this.startAtDay);
   }
 
