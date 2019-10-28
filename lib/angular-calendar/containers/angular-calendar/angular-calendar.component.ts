@@ -27,33 +27,19 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
 })
 export class AngularCalendarComponent implements OnDestroy, OnInit{
 
-    constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _config : AngularCalendarConfig) {
-        if(this._config){
-          /* grab data from config or set defaults */
-          this.timespanLabels = {...this.timespanLabels, ...this._config.labels}
-          const weekDays = this._config.labels.weekDays || [
-            {monday: 'Mon'},
-            {tuesday: 'Tue'},
-            {wednesday: 'Wed'},
-            {thursday: 'Thu'},
-            {friday: 'Fri'},
-            {saturday: 'Sat'},
-            {sunday: 'Sun'}
-          ];
-          this.weekDays = Object.keys(weekDays).map(key => weekDays[key]);
+    constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig) {
+        this.configOptions = new AngularCalendarConfig();
+        if(this._injectedConfig){
+          this.configOptions = {...this.configOptions, ..._injectedConfig};
         }
     }
 
+     configOptions:AngularCalendarConfig;
     /* Main date config Subject */
     dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
     dateData$ = this.dateData.asObservable().pipe(tap(console.log));
 
-    timespanLabels =  {
-      daily : 'daily',
-      weekly:  'weekly',
-      monthly : 'monthly'
-    }
-    weekDays: string [];
+    get timespanLabels(){return this.configOptions.timespanLabels;}
 
     // current day
     today = new Date();
@@ -94,7 +80,6 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
   ngOnInit(){
-    console.log(this.weekDays);
     this._createStartEndDates(this.startAtDay);
   }
 

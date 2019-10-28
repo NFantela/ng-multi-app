@@ -14,6 +14,9 @@ import { CalendarTableComponent } from './components/calendar-table/calendar-tab
 import { AngularCalendarHeadingDirective } from './directives/angular-calendar-heading/angular-calendar-heading';
 import { AngularCalendaFooterDirective } from './directives/anuglar-calendar-footer/anuglar-calendar-footer.directive';
 
+// pipes
+import { CurrentDateDisplayed } from './pipes/current-date-displayed/current-date-displayed.pipe';
+
 @NgModule({
     imports: [
         CommonModule
@@ -25,7 +28,8 @@ import { AngularCalendaFooterDirective } from './directives/anuglar-calendar-foo
         DailyViewComponent,
         AngularCalendarHeadingDirective,
         AngularCalendaFooterDirective,
-        CalendarTableComponent
+        CalendarTableComponent, 
+        CurrentDateDisplayed
     ],
     exports: [AngularCalendarComponent, AngularCalendarHeadingDirective, AngularCalendaFooterDirective],
     providers: []

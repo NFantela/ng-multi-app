@@ -1,5 +1,4 @@
-<section class="angular-calendar">
-    {{ dateData$ | async | json }}
+<section class="angular-calendar" *ngIf="dateData$ | async as dateData">
     <header class="angular-calendar__header">
         <ul>
             <li (click)="changeTimespan('day')"> {{ timespanLabels.daily }} </li> 
@@ -20,7 +19,7 @@
             <ng-content 
                 select="angular-calendar-heading">
             </ng-content><!-- header projected from directive -->
-            <div class="current-timespan"><h4>01.12. - 22.12.2019</h4></div>
+            <div class="current-timespan"><h4>{{ dateData | currentDateDisplayed }}</h4></div>
         </div>
 
         <button 
@@ -33,15 +32,17 @@
         </button>
          
     </div>
-    <div class="angular-calendar__calendar" *ngIf="dateData$ | async as dateData">
+    <div class="angular-calendar__calendar">
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
 
                 <monthly-view
                     [dateInformation]="dateData"
+                    [calendarConfig]="configOptions"
                     *ngSwitchCase="'month'">
                 </monthly-view>
                 <weekly-view
                     [dateInformation]="dateData"
+                    [calendarConfig]="configOptions"
                     *ngSwitchCase="'week'">
                 </weekly-view>
                 <daily-view

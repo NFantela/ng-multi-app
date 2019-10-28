@@ -50,20 +50,21 @@ import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-cal
     {
       provide: ANGULAR_CALENDAR_CONFIG,
       useValue: {
-        labels : {
-          daily : 'daily',
-          weekly: 'weekly',
-          monthly : 'monthly',
-          weekDays: [
-            {monday: 'Pon'},
-            {tuesday: 'Uto'},
-            {wednesday: 'Wed'},
-            {thursday: 'Thu'},
-            {friday: 'Fri'},
-            {saturday: 'Sat'},
-            {sunday: 'Sun'}
+        timespanLabels : {
+          daily : 'dnevno',
+          weekly: 'tjedno',
+          monthly : 'mjesecno'
+        },
+    
+        weekDayLabels: [
+          {monday: 'ponediljak'},
+          {tuesday: 'utorak'},
+          {wednesday: 'wednesday'},
+          {thursday: 'thursday'},
+          {friday: 'friday'},
+          {saturday: 'saturday'},
+          {sunday: 'sunday'}
         ]
-      }
       }
     }
   ],
