@@ -21,15 +21,47 @@ export class FakeEventsDataService{
     generatedFakeEvents:FakeEvent[] = [];
 
 
-    getEvents(dateConfig:AngularDateConfig):Observable<FakeEvent[]>{
-        // pick from our events based on params
-        return of(this.generatedFakeEvents).pipe(delay(800));
+    getEvents({endDate, startDate,  timespan}:AngularDateConfig):Observable<FakeEvent[]>{
+        const lastDayDay = endDate.getDate();
+        const lastDayMonth = endDate.getMonth();
+        const lastDayYear = endDate.getFullYear();
+
+        const firstDayDay = startDate.getDate();
+        const firstDayMonth = startDate.getMonth();
+        const firstDayYear = startDate.getFullYear();
+        
+        let foundEvents:FakeEvent[] = [];
+
+        for(let i = 0; i < this.generatedFakeEvents.length; i++){
+            const currentEventInLoop = this.generatedFakeEvents[i];
+            if(currentEventInLoop){
+                const loopEvDay = currentEventInLoop.eventDate.getDate();
+                const loopEvMonth = currentEventInLoop.eventDate.getMonth();
+                const loopEvYear = currentEventInLoop.eventDate.getFullYear();
+
+                if(timespan === 'day'){
+                    if(loopEvYear === lastDayYear && loopEvMonth === lastDayMonth && loopEvDay === lastDayDay){
+                        foundEvents.push(currentEventInLoop);
+                    }
+                } else {
+                    // TODO 
+                    // month && week
+                }
+            }
+        }
+        return of(foundEvents).pipe(delay(800));
     }
 
     private _generateEventsBasedOnCurrentDate(){
 
         const dateToMutate = new Date(this._currentDay);
-        
+        this.generatedFakeEvents.push( new FakeEvent(
+            'Event' ,
+            new Date(dateToMutate.setDate(dateToMutate.getDate())),
+            'Some description ',
+            this.cageImgUrl
+        ));
+
         for(let i = 0; i < 90; i++){
             if( i % 2 == 0){
                 // generate event for every odd number

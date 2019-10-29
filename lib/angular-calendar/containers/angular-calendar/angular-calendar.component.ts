@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit } from '@angular/core';
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap, filter, switchMap } from 'rxjs/operators';
 import { FakeEventsDataService } from 'lib/angular-calendar/services/fake-events-data/fake-events-data.service';
+import { FakeEvent } from 'lib/angular-calendar/models/fake-event';
 
 export interface AngularDateConfig  {
    startDate: Date;
@@ -49,6 +50,12 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     /* Main date config Subject */
     dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
     dateData$ = this.dateData.asObservable().pipe(tap(console.log));
+    /* Upon new subject emmission fetch new observable fromservice call */
+    eventsData$:Observable<FakeEvent[]> = this.dateData.asObservable().pipe(
+      filter(v => !!v),
+      switchMap(v => this._fakeEventsService.getEvents(v))
+    )
+    
 
     get timespanLabels(){return this.configOptions.timespanLabels;}
 
@@ -91,7 +98,6 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
   ngOnInit(){
-    this._fakeEventsService.getEvents(this.dateData.getValue()).subscribe(console.log);
     this._createStartEndDates(this.startAtDay);
   }
 
@@ -131,7 +137,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
       startDate,
       endDate,
       timespan: this.selectedView
-    })
+    });
   }
 
 
