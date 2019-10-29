@@ -9,6 +9,13 @@ export interface AngularDateConfig  {
    timespan:AngularCalendarTimeSpan
 }
 
+export class AngularCalendarCell {
+  constructor(public value: number,
+              public displayValue: string, /* e.g. monday */
+              public ariaLabel: string,
+              public enabled: boolean) {}
+}
+
 export class AngularCalendarDateChange implements  AngularDateConfig{
     constructor(
       public startDate: Date,

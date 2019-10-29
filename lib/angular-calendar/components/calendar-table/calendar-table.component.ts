@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
     selector: '[calendar-table]',
@@ -7,4 +7,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class CalendarTableComponent {
     constructor() {}
+
+    @Input() numCols = 7;
+
+    @Input() rows = 1;
 }
