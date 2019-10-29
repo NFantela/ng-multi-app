@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, E
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { FakeEventsDataService } from 'lib/angular-calendar/services/fake-events-data/fake-events-data.service';
 
 export interface AngularDateConfig  {
    startDate: Date;
@@ -34,7 +35,10 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
 })
 export class AngularCalendarComponent implements OnDestroy, OnInit{
 
-    constructor(@Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig) {
+    constructor(
+        @Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig,
+                private _fakeEventsService:FakeEventsDataService
+                ) {
         this.configOptions = new AngularCalendarConfig();
         if(this._injectedConfig){
           this.configOptions = {...this.configOptions, ..._injectedConfig};
@@ -87,7 +91,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   readonly  calendarDateChange:EventEmitter<AngularCalendarDateChange> = new EventEmitter();
 
   ngOnInit(){
-    console.log(this.configOptions)
+    this._fakeEventsService.getEvents(this.dateData.getValue()).subscribe(console.log);
     this._createStartEndDates(this.startAtDay);
   }
 
