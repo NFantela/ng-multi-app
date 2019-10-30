@@ -44,7 +44,7 @@ export class FakeEventsDataService{
                         foundEvents.push(currentEventInLoop);
                     }
                 } else {
-                    // TODO 
+                    // TODO DO THis
                     // month && week
                 }
             }

@@ -32,9 +32,9 @@
         </button>
          
     </div>
-    <div class="angular-calendar__calendar" *ngIf="eventsData$ | async as events">
+    <div class="angular-calendar__calendar">
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
-                {{ events | json }}
+           <pre>{{ eventData | json }}</pre> 
                 <monthly-view
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"

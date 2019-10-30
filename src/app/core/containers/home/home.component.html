@@ -5,13 +5,14 @@
     <div style="max-width:1000px; margin: 0 auto;">
             <angular-calendar
             [selectedView]="'week'" 
+            [eventData]="events$ | async"
             (calendarDateChange)="handleDateChange($event)">
                     <angular-calendar-heading>
                         <h3>Hello this is heading that is projected via directive</h3>
                     </angular-calendar-heading>
                     <ng-template>Hello use me as day template</ng-template>
                     <angular-calendar-footer>Some footer information</angular-calendar-footer>
-                </angular-calendar>
+            </angular-calendar>
            
     </div>
 

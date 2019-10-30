@@ -1,9 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit } from '@angular/core';
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap, filter, switchMap } from 'rxjs/operators';
-import { FakeEventsDataService } from 'lib/angular-calendar/services/fake-events-data/fake-events-data.service';
-import { FakeEvent } from 'lib/angular-calendar/models/fake-event';
+import { tap, filter, } from 'rxjs/operators';
+import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
 
 export interface AngularDateConfig  {
    startDate: Date;
@@ -37,9 +36,7 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
 export class AngularCalendarComponent implements OnDestroy, OnInit{
 
     constructor(
-        @Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig,
-                private _fakeEventsService:FakeEventsDataService
-                ) {
+        @Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig ) {
         this.configOptions = new AngularCalendarConfig();
         if(this._injectedConfig){
           this.configOptions = {...this.configOptions, ..._injectedConfig};
@@ -49,12 +46,12 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
      configOptions:AngularCalendarConfig;
     /* Main date config Subject */
     dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
-    dateData$ = this.dateData.asObservable().pipe(tap(console.log));
-    /* Upon new subject emmission fetch new observable fromservice call */
-    eventsData$:Observable<FakeEvent[]> = this.dateData.asObservable().pipe(
-      filter(v => !!v),
-      switchMap(v => this._fakeEventsService.getEvents(v))
-    )
+    dateData$:Observable<AngularDateConfig | null> = this.dateData.asObservable().pipe(
+        filter(dateData => !!dateData),
+        tap(({startDate, endDate, timespan}) => {
+          this.calendarDateChange.emit(new AngularCalendarDateChange(startDate, endDate, timespan));
+        })
+      );
     
 
     get timespanLabels(){return this.configOptions.timespanLabels;}
@@ -69,6 +66,14 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     }
 
   /* ====== INPUTS ================ */
+
+   // TODO we need real events here
+  @Input()
+  eventData:AngularCalendarData<any>[] = [];
+  /* To display loading indicator on calendar maybe let template be passed from config? */ 
+  @Input()
+  loadingData = false;
+
   /** Set the start view or default */
   @Input() 
   set selectedView(v: AngularCalendarTimeSpan ){
