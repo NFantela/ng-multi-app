@@ -9,8 +9,13 @@
                 cursor:pointer;
                 padding:1em;
                 text-transform: uppercase;
+                font-weight: bold;
+                position:relative;
                 &:hover{
                     opacity: .6;
+                }
+                &.nav-item-active{
+                    background-color:$white;
                 }
             }
         }

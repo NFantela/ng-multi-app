@@ -16,6 +16,7 @@ import { AngularCalendaFooterDirective } from './directives/anuglar-calendar-foo
 
 // pipes
 import { CurrentDateDisplayed } from './pipes/current-date-displayed/current-date-displayed.pipe';
+import { MatchTwoStringsPipe } from './pipes/match-two-strings/match-two-strings.pipe';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { CurrentDateDisplayed } from './pipes/current-date-displayed/current-dat
         AngularCalendarHeadingDirective,
         AngularCalendaFooterDirective,
         CalendarTableComponent, 
-        CurrentDateDisplayed
+        CurrentDateDisplayed,
+        MatchTwoStringsPipe
     ],
     exports: [AngularCalendarComponent, AngularCalendarHeadingDirective, AngularCalendaFooterDirective],
     providers: []

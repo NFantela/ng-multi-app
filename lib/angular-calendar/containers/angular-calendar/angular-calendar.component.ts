@@ -43,7 +43,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
         }
     }
 
-     configOptions:AngularCalendarConfig;
+    configOptions:AngularCalendarConfig;
     /* Main date config Subject */
     dateData:BehaviorSubject<AngularDateConfig> = new BehaviorSubject(null);
     dateData$:Observable<AngularDateConfig | null> = this.dateData.asObservable().pipe(
@@ -57,11 +57,11 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     get timespanLabels(){return this.configOptions.timespanLabels;}
 
     // current day
-    today = new Date();
+    private readonly _today = new Date();
 
     get isLastTimespan():boolean{
       const lastDayInSelect = this.dateData.getValue().endDate;
-      const today = this.today;
+      const today = this._today;
       return this._isCurrentGreaterThanToday(lastDayInSelect, today);
     }
 
@@ -97,6 +97,9 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   }
   private _startAtDay: Date = new Date();
 
+  /* used when navigating calendar will be mutated */
+  private _currentTrackedDay:Date;
+
 
   /* ====== OUTPUTS ================ */
   @Output()
@@ -104,6 +107,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
 
   ngOnInit(){
     this._createStartEndDates(this.startAtDay);
+    this._currentTrackedDay = new Date(this._startAtDay); //  by now the date should be set or received via input
   }
 
   ngOnDestroy(){
@@ -114,6 +118,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
 
   /* depending on current selectedView calculate start and end dates for that time period */
   private _createStartEndDates(date:Date){
+    console.log(date)
     let startDate:Date;
     let endDate:Date;
     const year = date.getFullYear();
@@ -146,25 +151,41 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   }
 
 
-
+  /* On toggling calendar arrows calculate next timespan */
   handleDateChange(changeType: 'prev' |  'next'){
-    // TODO
-    // TODOOOO
     if(changeType === 'prev'){
-        // need to get the correct date depending on the current selectedView
-        // mind the year flops
-        // then use _createStartEndDates(date)
-       // this.calendarDateChange.emit(new AngularCalendarDateChange("01-12", "31-12", "day"))
+      this._calculateNewDateOnArrowsClick('prev');
+      return this._createStartEndDates(this._currentTrackedDay);
     } else {
+      // next section
       if(!this.isLastTimespan){
-
+        this._calculateNewDateOnArrowsClick('next');
+        return this._createStartEndDates(this._currentTrackedDay);
       }
     }
   }
+
   /* On timespan label click set new timespan and recalculate dates */
   changeTimespan(e:AngularCalendarTimeSpan){
     this.selectedView = e;
     this._createStartEndDates(this.startAtDay);
+  }
+  /* Used in handleDateChange() calculates new date for _currentTrackedDay */
+  private _calculateNewDateOnArrowsClick(change:'prev' |  'next'){
+    if(this.selectedView === 'day'){
+      this._currentTrackedDay = new Date(this._currentTrackedDay.setDate(
+        (change==='prev') ? this._currentTrackedDay.getDate() - 1 : this._currentTrackedDay.getDate() + 1 )
+      );
+    }
+    if(this.selectedView === 'week'){
+      this._currentTrackedDay = new Date(this._currentTrackedDay.setDate(
+        (change==='prev') ? this._currentTrackedDay.getDate() - 7 : this._currentTrackedDay.getDate() + 7 )
+      );
+    }
+    if(this.selectedView === 'month'){
+      const maxDaysInCurrentMonth = new Date(this._currentTrackedDay.getFullYear(), this._currentTrackedDay.getMonth(), 0).getDate();
+      this._currentTrackedDay = new Date(this._currentTrackedDay.setDate( (change==='prev') ? -1 : maxDaysInCurrentMonth + 1 )   );
+    }      
   }
 
   private _isCurrentGreaterThanToday(lastDay:Date, today:Date):boolean{

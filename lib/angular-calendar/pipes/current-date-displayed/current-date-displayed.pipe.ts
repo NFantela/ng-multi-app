@@ -18,7 +18,7 @@ export class CurrentDateDisplayed implements PipeTransform {
     }
 
     private _createDayString(val:Date):string{
-        return `${val.getDate()}.${val.getMonth()}.${val.getFullYear()}`;
+        return `${val.getDate()}.${val.getMonth() + 1}.${val.getFullYear()}`;
     }
 
 }
