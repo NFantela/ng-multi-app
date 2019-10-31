@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, first, tap } from 'rxjs/operators';
 
 import { FakeEvent } from 'lib/angular-calendar/models/fake-event';
 import { AngularDateConfig } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
@@ -18,7 +18,26 @@ export class FakeEventsDataService{
     private readonly _currentDay:Date;
     readonly cageImgUrl = 'https://www.placecage.com/300/300';
 
-    generatedFakeEvents:FakeEvent[] = [];
+    generatedFakeEvents:FakeEvent[] = [
+        new FakeEvent(
+            'JS powa event' ,
+            new Date(),
+            'Some description here',
+            this.cageImgUrl
+        ),
+        new FakeEvent(
+            'Another JS framework relased' ,
+            new Date(),
+            'Some description here',
+            this.cageImgUrl
+        ),
+        new FakeEvent(
+            'JS Coercion for dummies' ,
+            new Date(),
+            'You are not prepared!...',
+            this.cageImgUrl
+        )
+    ];
 
 
     getEvents({endDate, startDate,  timespan}:AngularDateConfig):Observable<FakeEvent[]>{
@@ -43,24 +62,44 @@ export class FakeEventsDataService{
                     if(loopEvYear === lastDayYear && loopEvMonth === lastDayMonth && loopEvDay === lastDayDay){
                         foundEvents.push(currentEventInLoop);
                     }
-                } else {
-                    // TODO DO THis
-                    // month && week
+                } 
+                // month
+                if(timespan === 'month'){
+                    if(loopEvYear === lastDayYear && loopEvMonth === lastDayMonth){
+                        foundEvents.push(currentEventInLoop);
+                    }
+                }
+                // week - tricky could span between months / year
+                if(timespan === 'week'){
+                // between and max date TODO NOT WORKING
+                    // 1 year match
+                    if(loopEvYear == firstDayYear || loopEvYear == lastDayYear ){
+                        // 2 month match
+                        if(loopEvMonth == firstDayMonth || loopEvMonth == lastDayMonth ){
+                            // 3 day match
+                            // month crossover e.g. 31 between 28 - 03
+                            if(firstDayMonth !== lastDayMonth){
+                                if(loopEvMonth === firstDayMonth && loopEvDay >= firstDayDay){
+                                    foundEvents.push(currentEventInLoop);
+                                }
+                                if(loopEvMonth === lastDayMonth && loopEvDay <= lastDayDay){
+                                    foundEvents.push(currentEventInLoop);
+                                }
+                            } else {
+                                if(loopEvDay >= firstDayDay && loopEvDay <= lastDayDay) {
+                                    foundEvents.push(currentEventInLoop);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-        return of(foundEvents).pipe(delay(800));
+        return of(foundEvents).pipe(delay(800), tap(console.log));
     }
 
     private _generateEventsBasedOnCurrentDate(){
-
-        const dateToMutate = new Date(this._currentDay);
-        this.generatedFakeEvents.push( new FakeEvent(
-            'Event' ,
-            new Date(dateToMutate.setDate(dateToMutate.getDate())),
-            'Some description ',
-            this.cageImgUrl
-        ));
+        const dateToMutate = new Date(this._currentDay.getFullYear(), this._currentDay.getMonth() + 1, this._currentDay.getDate() );
 
         for(let i = 0; i < 90; i++){
             if( i % 2 == 0){
@@ -74,7 +113,7 @@ export class FakeEventsDataService{
                 this.generatedFakeEvents.push(event);
             }
         }
-
+        console.log(this.generatedFakeEvents)
     }
 
 }

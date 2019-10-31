@@ -59,12 +59,6 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     // current day
     private readonly _today = new Date();
 
-    get isLastTimespan():boolean{
-      const lastDayInSelect = this.dateData.getValue().endDate;
-      const today = this._today;
-      return this._isCurrentGreaterThanToday(lastDayInSelect, today);
-    }
-
   /* ====== INPUTS ================ */
 
    // TODO we need real events here
@@ -158,16 +152,15 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
       return this._createStartEndDates(this._currentTrackedDay);
     } else {
       // next section
-      if(!this.isLastTimespan){
         this._calculateNewDateOnArrowsClick('next');
         return this._createStartEndDates(this._currentTrackedDay);
-      }
     }
   }
 
   /* On timespan label click set new timespan and recalculate dates */
   changeTimespan(e:AngularCalendarTimeSpan){
     this.selectedView = e;
+    this._currentTrackedDay = new Date(this.startAtDay);
     this._createStartEndDates(this.startAtDay);
   }
   /* Used in handleDateChange() calculates new date for _currentTrackedDay */
@@ -184,37 +177,9 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     }
     if(this.selectedView === 'month'){
       const maxDaysInCurrentMonth = new Date(this._currentTrackedDay.getFullYear(), this._currentTrackedDay.getMonth(), 0).getDate();
-      this._currentTrackedDay = new Date(this._currentTrackedDay.setDate( (change==='prev') ? -1 : maxDaysInCurrentMonth + 1 )   );
+      this._currentTrackedDay = new Date(this._currentTrackedDay.setDate( (change==='prev') ? -1 : maxDaysInCurrentMonth + 2 )   );
     }      
   }
 
-  private _isCurrentGreaterThanToday(lastDay:Date, today:Date):boolean{
-    if(lastDay && today){
-      const lastDayYear = lastDay.getFullYear();
-      const lastDayMonth = lastDay.getMonth();
-      const lastDayDay = lastDay.getDate(); 
-
-      const todayYear = today.getFullYear();
-      const todayMonth = today.getMonth();
-      const todayDay = today.getDate();
-        // shortcut on year
-        if(lastDayYear < todayYear){
-          return false;
-        }
-        if(lastDayYear == todayYear){
-           // exit on month
-          if(lastDayMonth < todayMonth){
-            return false;
-          }
-          if(lastDayMonth == todayMonth){
-            // check days
-            if(lastDayDay < todayDay){
-              return false;
-            } 
-          }
-        }
-        return true;
-    }
-  }
 
 }
