@@ -9,6 +9,7 @@ import { WeeklyViewComponent } from './components/weekly-view/weekly-view.compon
 import { MonthlyViewComponent } from './components/monthly-view/monthly-view.component';
 import { DailyViewComponent } from './components/daily-view/daily-view.component';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
+import { TableWeekdaysHeadingComponent } from './components/table-weekdays-heading/table-weekdays-heading.component';
 
 // directives
 import { AngularCalendarHeadingDirective } from './directives/angular-calendar-heading/angular-calendar-heading';
@@ -31,7 +32,8 @@ import { MatchTwoStringsPipe } from './pipes/match-two-strings/match-two-strings
         AngularCalendaFooterDirective,
         CalendarTableComponent, 
         CurrentDateDisplayed,
-        MatchTwoStringsPipe
+        MatchTwoStringsPipe,
+        TableWeekdaysHeadingComponent
     ],
     exports: [AngularCalendarComponent, AngularCalendarHeadingDirective, AngularCalendaFooterDirective],
     providers: []

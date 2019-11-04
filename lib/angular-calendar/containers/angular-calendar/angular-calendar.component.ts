@@ -55,6 +55,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     
 
     get timespanLabels(){return this.configOptions.timespanLabels;}
+    get weekDayLabels() { return this.configOptions.weekDayLabels;}
 
     // current day
     private readonly _today = new Date();
@@ -112,7 +113,6 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
 
   /* depending on current selectedView calculate start and end dates for that time period */
   private _createStartEndDates(date:Date){
-    console.log(date)
     let startDate:Date;
     let endDate:Date;
     const year = date.getFullYear();

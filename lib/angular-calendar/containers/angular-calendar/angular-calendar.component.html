@@ -45,13 +45,14 @@
     </div>
     <div class="angular-calendar__calendar">
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
-           <pre>{{ eventData | json }}</pre> 
                 <monthly-view
+                    [labels]="weekDayLabels"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
                     *ngSwitchCase="'month'">
                 </monthly-view>
                 <weekly-view
+                    [labels]="weekDayLabels"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
                     *ngSwitchCase="'week'">

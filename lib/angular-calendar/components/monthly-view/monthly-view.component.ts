@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { AngularDateConfig } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 import { AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
+import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
 
 @Component({
     selector: 'monthly-view',
@@ -21,6 +22,13 @@ export class MonthlyViewComponent {
 
     @Input()
     calendarConfig:AngularCalendarConfig;
+
+    @Input()
+    labels: Array<{[key:string]: string}> = [];
+
+    // TODO CALCULATE CELLS here!!
+    @Input()
+    eventData:AngularCalendarData<any>[] = [];
 
     // data to be passed to calendar table as rows
     weekCells : any
