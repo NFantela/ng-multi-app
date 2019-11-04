@@ -24,17 +24,31 @@ export class WeeklyViewComponent {
     calendarConfig:AngularCalendarConfig;
 
     // TODO CALCULATE CELLS here!!
+    // START API
+
     @Input()
-    eventData:AngularCalendarData<any>[] = [];
+    set eventData(evData:AngularCalendarData<any>[]){
+        if(evData && evData.length){
+            this._generateDaysCells(this._dateInformation, evData)
+        }
+    }
 
     @Input()
     labels: Array<{[key:string]: string}> = [];
 
     // data to be passed to calendar table as rows
-    dayCells : any
+    dayCells : Array<AngularCalendarCell[]>;
 
-    private _generateDaysCells(dates:AngularDateConfig){
-        // we need arrays in arrays to generate row from first item then <td> from item
+    private _generateDaysCells(dates:AngularDateConfig, eventData = []){
+        // we need arrays in arrays to generate 
+        //  so 1 st ngFor will be for rows and then nested one will generated <td>
+
+        // in case of week there will every only be 1 row
+
+        // number of days between start and endDate
+        const datesInTimespan = (dates && dates.timespan === 'week')  ? 7  : dates.endDate.getDate();
+        console.log(datesInTimespan);
+
         // const daysInMonth = this._dateAdapter.getNumDaysInMonth(this.activeDate);
         // const dateNames = this._dateAdapter.getDateNames();
         // this._weeks = [[]];

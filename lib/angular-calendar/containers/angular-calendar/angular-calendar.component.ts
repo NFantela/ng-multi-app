@@ -14,7 +14,9 @@ export class AngularCalendarCell {
   constructor(public value: number,
               public displayValue: string, /* e.g. monday */
               public ariaLabel: string,
-              public enabled: boolean) {}
+              public enabled: boolean,
+              public events?: AngularCalendarData<any>
+              ) {}
 }
 
 export class AngularCalendarDateChange implements  AngularDateConfig{

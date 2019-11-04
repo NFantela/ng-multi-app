@@ -15,7 +15,7 @@ export class MonthlyViewComponent {
     set dateInformation(v:AngularDateConfig | null){
         if(v){
             this._dateInformation = v;
-            this._generateWeekCells(v);
+            this._generateDaysCells(v);
         }
     };
     private _dateInformation:AngularDateConfig;
@@ -26,15 +26,29 @@ export class MonthlyViewComponent {
     @Input()
     labels: Array<{[key:string]: string}> = [];
 
-    // TODO CALCULATE CELLS here!!
     @Input()
-    eventData:AngularCalendarData<any>[] = [];
+    set eventData(evData:AngularCalendarData<any>[]){
+        if(evData && evData.length){
+            this._generateDaysCells(this._dateInformation, evData)
+        }
+    }
 
     // data to be passed to calendar table as rows
     weekCells : any
+    // Number of blank cells in the first row before the 1st of the month. 
+    private _firstWeekOffset: number;
 
-    private _generateWeekCells(dates:AngularDateConfig){
-        // we need arrays in arrays to generate row from first item then <td> from item
+    private _generateDaysCells(dates:AngularDateConfig, eventData = []){
+        // we need arrays in arrays to generate 
+        //  so 1 st ngFor will be for rows and then nested one will generated <td>
+
+        // number of days between start and endDate
+        const datesInTimespan =  dates.endDate.getDate();
+        // in case of month calculate offset
+        // get the first day of the month day in week
+        const firstDayOfMonth =  dates.startDate.getDay(); // Sunday - Saturday : 0 - 6
+        this._firstWeekOffset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1  
+
         // const daysInMonth = this._dateAdapter.getNumDaysInMonth(this.activeDate);
         // const dateNames = this._dateAdapter.getDateNames();
         // this._weeks = [[]];
