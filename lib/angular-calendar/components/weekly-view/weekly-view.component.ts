@@ -49,8 +49,7 @@ export class WeeklyViewComponent {
         // we need all the days to loop over them this is important because of monthcrossing
         const startatDate = dates.startDate.getDate();
         let dateToMutate = new Date(dates.endDate );
-        console.log(dates)
-        console.log(dateToMutate)
+
         while (dateToMutate.getDate() !== startatDate -1) {
                // if we have events
                let events = [];
@@ -68,7 +67,7 @@ export class WeeklyViewComponent {
                 );
                    dateToMutate = new Date(dateToMutate.setDate(dateToMutate.getDate() -1));         
         }
-
+        this.dayCells = [[...this.dayCells[0].reverse()]];
     }
     
 }

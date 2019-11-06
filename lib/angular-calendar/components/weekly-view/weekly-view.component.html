@@ -3,7 +3,9 @@ weekly
     <thead >
       <tr>        <table-weekdays-heading [labels]="labels"></table-weekdays-heading> </tr>
     </thead>
-    <tbody calendar-table>
+    <tbody 
+      calendar-table
+      [rows]="dayCells">
     </tbody>
 </table>
   

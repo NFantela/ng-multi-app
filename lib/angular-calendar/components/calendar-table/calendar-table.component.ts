@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
     selector: '[calendar-table]',
@@ -10,5 +11,5 @@ export class CalendarTableComponent {
 
     @Input() numCols = 7;
 
-    @Input() rows = 1;
+    @Input() rows:Array<AngularCalendarCell[]> = [[]];
 }
