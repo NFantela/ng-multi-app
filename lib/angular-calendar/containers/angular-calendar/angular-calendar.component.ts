@@ -12,10 +12,8 @@ export interface AngularDateConfig  {
 
 export class AngularCalendarCell {
   constructor(public value: number,
-              public displayValue: string, /* e.g. monday */
-              public ariaLabel: string,
               public enabled: boolean,
-              public events?: AngularCalendarData<any>
+              public events?: any[]
               ) {}
 }
 
@@ -66,7 +64,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
 
    // TODO we need real events here
   @Input()
-  eventData:AngularCalendarData<any>[] = [];
+  eventData:AngularCalendarData<any>;
   /* To display loading indicator on calendar maybe let template be passed from config? */ 
   @Input()
   loadingData = false;

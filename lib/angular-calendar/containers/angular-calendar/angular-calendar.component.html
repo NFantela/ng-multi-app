@@ -47,12 +47,14 @@
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
                 <monthly-view
                     [labels]="weekDayLabels"
+                    [eventData]="eventData"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
                     *ngSwitchCase="'month'">
                 </monthly-view>
                 <weekly-view
                     [labels]="weekDayLabels"
+                    [eventData]="eventData"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
                     *ngSwitchCase="'week'">

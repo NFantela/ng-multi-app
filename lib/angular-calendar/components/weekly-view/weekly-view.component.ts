@@ -27,8 +27,8 @@ export class WeeklyViewComponent {
     // START API
 
     @Input()
-    set eventData(evData:AngularCalendarData<any>[]){
-        if(evData && evData.length){
+    set eventData(evData:AngularCalendarData<any>){
+        if(evData){
             this._generateDaysCells(this._dateInformation, evData)
         }
     }
@@ -39,34 +39,36 @@ export class WeeklyViewComponent {
     // data to be passed to calendar table as rows
     dayCells : Array<AngularCalendarCell[]>;
 
-    private _generateDaysCells(dates:AngularDateConfig, eventData = []){
+    private _generateDaysCells(dates:AngularDateConfig, eventData:AngularCalendarData<any> = null){
         // we need arrays in arrays to generate 
         //  so 1 st ngFor will be for rows and then nested one will generated <td>
 
         // in case of week there will every only be 1 row
+        this.dayCells = [[]];
 
-        // number of days between start and endDate
-        const datesInTimespan = (dates && dates.timespan === 'week')  ? 7  : dates.endDate.getDate();
-        console.log(datesInTimespan);
+        // we need all the days to loop over them this is important because of monthcrossing
+        const startatDate = dates.startDate.getDate();
+        let dateToMutate = new Date(dates.endDate );
+        console.log(dates)
+        console.log(dateToMutate)
+        while (dateToMutate.getDate() !== startatDate -1) {
+               // if we have events
+               let events = [];
+               if(eventData){
+                   eventData.calendarData.forEach(e => {
+                       const dateOFEvent = e.dateForItem.getDate();
+                       if((dateToMutate.getDate()) == dateOFEvent){
+                           events.push(e);
+                       }
+                   })
+               }
+               this.dayCells[this.dayCells.length - 1]
+                .push(
+                       new AngularCalendarCell(dateToMutate.getDate(), true, events)
+                );
+                   dateToMutate = new Date(dateToMutate.setDate(dateToMutate.getDate() -1));         
+        }
 
-        // const daysInMonth = this._dateAdapter.getNumDaysInMonth(this.activeDate);
-        // const dateNames = this._dateAdapter.getDateNames();
-        // this._weeks = [[]];
-        // for (let i = 0, cell = this._firstWeekOffset; i < daysInMonth; i++, cell++) {
-        //   if (cell == DAYS_PER_WEEK) {
-        //     this._weeks.push([]);
-        //     cell = 0;
-        //   }
-        //   const date = this._dateAdapter.createDate(
-        //         this._dateAdapter.getYear(this.activeDate),
-        //         this._dateAdapter.getMonth(this.activeDate), i + 1);
-        //   const enabled = this._shouldEnableDate(date);
-        //   const ariaLabel = this._dateAdapter.format(date, this._dateFormats.display.dateA11yLabel);
-        //   const cellClasses = this.dateClass ? this.dateClass(date) : undefined;
-    
-        //   this._weeks[this._weeks.length - 1]
-        //       .push(new MatCalendarCell(i + 1, dateNames[i], ariaLabel, enabled, cellClasses));
-        // }
     }
     
 }
