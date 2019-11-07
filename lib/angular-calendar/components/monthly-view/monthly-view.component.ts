@@ -36,7 +36,7 @@ export class MonthlyViewComponent {
     // data to be passed to calendar table as rows
     weekCells : Array<AngularCalendarCell[]>;
     // Number of blank cells in the first row before the 1st of the month. 
-    private _firstWeekOffset: number;
+    firstWeekOffset: number;
 
     private _generateDaysCells(dates:AngularDateConfig, eventData:AngularCalendarData<any> = null){
         // we need arrays in arrays to generate 
@@ -47,10 +47,10 @@ export class MonthlyViewComponent {
         // in case of month calculate offset
         // get the first day of the month day in week
         const firstDayOfMonth =  dates.startDate.getDay(); // Sunday - Saturday : 0 - 6
-        this._firstWeekOffset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1  
+        this.firstWeekOffset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1  
         this.weekCells = [[]];
         // TODO NEXT HERE
-        for(let i = 0, cell = this._firstWeekOffset; i < datesInTimespan; i++, cell++){
+        for(let i = 0, cell = this.firstWeekOffset; i < datesInTimespan; i++, cell++){
          // when cell reaches 7 (num of days in the week reset it to 0) and create a new arr 
          // for the cells to be pushed in
             if(cell == 7) {

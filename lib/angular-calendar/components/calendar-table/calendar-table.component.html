@@ -1,23 +1,22 @@
 <!-- Create the first row separately so we can include a special spacer cell. -->
 <tr *ngFor="let row of rows; let rowIndex = index" role="row">
-  <!--
-    We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.
-    The aspect ratio of the table cells is maintained by setting the top and bottom padding as a
-    percentage of the width (a variant of the trick described here:
-    https://www.w3schools.com/howto/howto_css_aspect_ratio.asp).
-  -->
-  <!-- <td *ngIf="rowIndex === 0 && _firstRowOffset"
-      aria-hidden="true"
-      class="mat-calendar-body-label"
-      [attr.colspan]="_firstRowOffset"
-      [style.paddingTop]="_cellPadding"
-      [style.paddingBottom]="_cellPadding">
-    {{_firstRowOffset >= labelMinRequiredCells ? label : ''}}
-  </td> -->
+<!-- first row -->
+<ng-container *ngIf="rowIndex == 0 && offsetCells.length">
+  <td *ngFor="let emptyCell of offsetCells" class="empty-calendar-cell">
+    <div class="empty-calendar-cell"></div>
+  </td>
+</ng-container>
+
   <td *ngFor="let item of row; let colIndex = index">
       <div class="mat-calendar-body-cell-content">
         {{item.value }}
         {{item.events}}
       </div>
   </td>
+  <!-- last row -->
+  <ng-container *ngIf="rowIndex + 1 === rows.length && lastRowOffsetCells.length">
+      <td *ngFor="let emptyCell of lastRowOffsetCells" class="empty-calendar-cell">
+        <div class="empty-calendar-cell"></div>
+      </td>
+    </ng-container>
 </tr>
