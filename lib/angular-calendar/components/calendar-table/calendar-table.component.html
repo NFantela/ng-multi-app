@@ -2,21 +2,22 @@
 <tr *ngFor="let row of rows; let rowIndex = index" role="row">
 <!-- first row -->
 <ng-container *ngIf="rowIndex == 0 && offsetCells.length">
-  <td *ngFor="let emptyCell of offsetCells" class="empty-calendar-cell">
-    <div class="empty-calendar-cell"></div>
+  <td *ngFor="let emptyCell of offsetCells" class="calendar-table-cell">
+    <div class="calendar-table-cell__content"></div>
   </td>
 </ng-container>
 
-  <td *ngFor="let item of row; let colIndex = index">
-      <div class="mat-calendar-body-cell-content">
-        {{item.value }}
-        {{item.events}}
+  <td *ngFor="let item of row; let colIndex = index" class="calendar-table-cell">
+      <div class="calendar-table-cell__content">
+        <span class="cell-date-num">{{item.value }}</span>
+        <span class="cell-events-tag" [class.hidden]="!item.events.length">{{item?.events.length}}</span>
+        
       </div>
   </td>
   <!-- last row -->
   <ng-container *ngIf="rowIndex + 1 === rows.length && lastRowOffsetCells.length">
-      <td *ngFor="let emptyCell of lastRowOffsetCells" class="empty-calendar-cell">
-        <div class="empty-calendar-cell"></div>
+      <td *ngFor="let emptyCell of lastRowOffsetCells" class="calendar-table-cell">
+        <div class="calendar-table-cell__content"></div>
       </td>
     </ng-container>
 </tr>

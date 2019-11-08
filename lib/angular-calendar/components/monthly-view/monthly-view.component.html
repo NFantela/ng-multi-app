@@ -1,8 +1,8 @@
 monthly
-<table  role="presentation">
+<table  role="presentation" >
     <thead >
       <tr>
-        <table-weekdays-heading [labels]="labels"></table-weekdays-heading>
+        <th *ngFor="let label of labels">{{ label }} </th>
     </tr>
     </thead>
     <tbody 

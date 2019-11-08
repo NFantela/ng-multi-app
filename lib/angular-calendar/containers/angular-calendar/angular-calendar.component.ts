@@ -55,7 +55,17 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     
 
     get timespanLabels(){return this.configOptions.timespanLabels;}
-    get weekDayLabels() { return this.configOptions.weekDayLabels;}
+    
+    get weekDayLabels() { 
+      const labelArr:string[] = [];
+        this.configOptions.weekDayLabels.forEach(labelObj => {
+           const label =  Object.keys(labelObj)[0];
+           if(label){
+            labelArr.push(labelObj[label]);
+           }
+        })
+        return labelArr;
+    }
 
     // current day
     private readonly _today = new Date();

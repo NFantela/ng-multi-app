@@ -6,6 +6,7 @@ import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calenda
 @Component({
     selector: 'weekly-view',
     templateUrl : 'weekly-view.component.html',
+    styleUrls: ['weekly-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeeklyViewComponent {
@@ -34,7 +35,7 @@ export class WeeklyViewComponent {
     }
 
     @Input()
-    labels: Array<{[key:string]: string}> = [];
+    labels: string[] = [];
 
     // data to be passed to calendar table as rows
     dayCells : Array<AngularCalendarCell[]>;

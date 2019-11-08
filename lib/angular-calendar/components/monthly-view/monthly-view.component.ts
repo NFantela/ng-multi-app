@@ -6,6 +6,7 @@ import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calenda
 @Component({
     selector: 'monthly-view',
     templateUrl : 'monthly-view.component.html',
+    styleUrls: ['monthly-view.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthlyViewComponent {
@@ -24,7 +25,7 @@ export class MonthlyViewComponent {
     calendarConfig:AngularCalendarConfig;
 
     @Input()
-    labels: Array<{[key:string]: string}> = [];
+    labels: string[] = [];
 
     @Input()
     set eventData(evData:AngularCalendarData<any>){
