@@ -119,7 +119,7 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     this.dateData.complete();
   }
 
-  @ContentChild(TemplateRef, {static:false}) dayTemplate: TemplateRef<any>;
+  @ContentChild(TemplateRef, {static:false}) eventTemplate: TemplateRef<any>;
 
   /* depending on current selectedView calculate start and end dates for that time period */
   private _createStartEndDates(date:Date){

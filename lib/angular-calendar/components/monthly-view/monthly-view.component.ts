@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
 import { AngularDateConfig, AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 import { AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
@@ -33,6 +33,9 @@ export class MonthlyViewComponent {
             this._generateDaysCells(this._dateInformation, evData)
         }
     }
+
+    @Input()
+    eventTemplate: TemplateRef<any> | undefined;
 
     // data to be passed to calendar table as rows
     weekCells : Array<AngularCalendarCell[]>;

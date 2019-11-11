@@ -10,7 +10,14 @@
                     <angular-calendar-heading>
                         <h3>Hello this is heading that is projected via directive</h3>
                     </angular-calendar-heading>
-                    <ng-template>Hello use me as day template</ng-template>
+
+                    <ng-template let-event>
+                            <div class="my-event">
+                                <h3>{{ event.eventName }}</h3>
+                                <img [src]="event.eventImg">
+                            </div>
+                    </ng-template>
+                    
                     <angular-calendar-footer>Some footer information</angular-calendar-footer>
             </angular-calendar>
            

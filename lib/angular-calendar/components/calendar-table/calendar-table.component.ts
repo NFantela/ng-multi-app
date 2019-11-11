@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
 import { AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
@@ -14,6 +14,9 @@ export class CalendarTableComponent {
     lastRowOffsetCells:number[] = [];
 
     @Input() numCols = 7;
+
+    @Input()
+    eventTemplate: TemplateRef<any> | undefined;
 
     @Input() 
     set rows(val:Array<AngularCalendarCell[]>){

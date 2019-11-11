@@ -46,6 +46,7 @@
     <div class="angular-calendar__calendar">
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
                 <monthly-view
+                    [eventTemplate]="eventTemplate"
                     [labels]="weekDayLabels"
                     [eventData]="eventData"
                     [dateInformation]="dateData"
@@ -53,6 +54,7 @@
                     *ngSwitchCase="'month'">
                 </monthly-view>
                 <weekly-view
+                    [eventTemplate]="eventTemplate"
                     [labels]="weekDayLabels"
                     [eventData]="eventData"
                     [dateInformation]="dateData"
@@ -60,13 +62,11 @@
                     *ngSwitchCase="'week'">
                 </weekly-view>
                 <daily-view
+                    [eventTemplate]="eventTemplate"
                     [dateInformation]="dateData"
                     *ngSwitchCase="'day'">
                 </daily-view>
 
-                <div>
-                    <ng-container *ngTemplateOutlet="dayTemplate"></ng-container>
-                </div>
         </div>
 
     </div>
