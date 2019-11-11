@@ -20,6 +20,9 @@
             }
         }
     }
+    &__calendar{
+        position:relative;
+    }
     &__date, &__calendar{
         background:$white;
     }

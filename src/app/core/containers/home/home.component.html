@@ -4,7 +4,8 @@
 
     <div style="max-width:1000px; margin: 0 auto;">
             <angular-calendar
-            [selectedView]="'week'" 
+            [selectedView]="'week'"
+            [loadingData]="loadingData" 
             [eventData]="events$ | async"
             (calendarDateChange)="handleDateChange($event)">
                     <angular-calendar-heading>

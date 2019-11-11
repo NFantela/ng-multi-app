@@ -10,13 +10,19 @@
     box-sizing: border-box;
     color: #98a0a6;
     position: relative;
-    pointer-events: none;
     z-index: 1;
-
-    cursor: pointer;
     width: 14%;
     text-align: center;
+    &.has-events{
+        &:hover{
+            background:antiquewhite;
+        }
+    }
+    &.has-events > &__content{
+        cursor: pointer;
+    }
     &__content{
+        position:relative;
         display:flex;
         .cell-date-num{
             display:inline-block;
@@ -31,5 +37,24 @@
                 visibility: hidden;
             }
         }
+        .event-template-list{
+            display: none;
+            visibility: hidden;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            top:30px;
+            left:0;
+            max-width: 330px;
+            box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+            background-color: #fff;
+        }
+        &.displayed{
+            .event-template-list{
+                display: inherit;
+                visibility: visible;
+            }
+        }
     }
+    
 }

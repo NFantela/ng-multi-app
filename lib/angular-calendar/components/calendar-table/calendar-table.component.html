@@ -7,13 +7,16 @@
   </td>
 </ng-container>
 
-  <td *ngFor="let item of row; let colIndex = index" class="calendar-table-cell">
-      <div class="calendar-table-cell__content">
-        <span class="cell-date-num">{{item.value }}</span>
+  <td *ngFor="let item of row; let colIndex = index" class="calendar-table-cell" [class.has-events]="item?.events.length">
+      <div class="calendar-table-cell__content"  [class.displayed]="currentDisplayedEventsCell.column == colIndex && currentDisplayedEventsCell.row == rowIndex" (click)="toggleDisplayingOfEvents(rowIndex, colIndex)">
+        <span class="cell-date-num" >{{item.value }}</span>
         <span class="cell-events-tag" [class.hidden]="!item.events.length">{{item?.events.length}}</span>
+
         <div *ngIf="eventTemplate" class="event-template-list">
           <div *ngFor="let event of item.events">
-            <ng-container *ngTemplateOutlet="eventTemplate; context: {$implicit: event.item}"></ng-container>
+            <ng-container 
+              *ngTemplateOutlet="eventTemplate; context: {$implicit: event.item}">
+           </ng-container>
           </div>
         </div>
 
@@ -26,4 +29,6 @@
       </td>
     </ng-container>
 </tr>
+
+{{ currentDisplayedEventsCell | json }}
 

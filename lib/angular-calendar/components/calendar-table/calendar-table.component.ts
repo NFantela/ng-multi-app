@@ -13,6 +13,8 @@ export class CalendarTableComponent {
     offsetCells:number[] = [];
     lastRowOffsetCells:number[] = [];
 
+    currentDisplayedEventsCell = {row: -1 , column: -1};
+
     @Input() numCols = 7;
 
     @Input()
@@ -46,6 +48,17 @@ export class CalendarTableComponent {
                 this.offsetCells.push(offsetValue);
                 offsetValue--;
             }
+        }
+    }
+
+    toggleDisplayingOfEvents(rowIndex, colIndex:number):void{
+        console.log(colIndex)
+        if(this.currentDisplayedEventsCell.column == colIndex && this.currentDisplayedEventsCell.row == rowIndex){
+            this.currentDisplayedEventsCell.column = -1;
+            this.currentDisplayedEventsCell.row = -1;
+        } else {
+            this.currentDisplayedEventsCell.column = colIndex;
+            this.currentDisplayedEventsCell.row = rowIndex;
         }
     }
 

@@ -45,6 +45,10 @@
     </div>
     <div class="angular-calendar__calendar">
         <div class="cangular-calendar__calendar__wrapper" [ngSwitch]="dateData.timespan">
+
+            <calendar-loading-spinner *ngIf="loadingData">
+            </calendar-loading-spinner>
+
                 <monthly-view
                     [eventTemplate]="eventTemplate"
                     [labels]="weekDayLabels"
