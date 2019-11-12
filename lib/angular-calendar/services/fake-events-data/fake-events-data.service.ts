@@ -16,26 +16,26 @@ export class FakeEventsDataService{
     }
     /* Set current date and image URL  */
     private readonly _currentDay:Date;
-    readonly cageImgUrl = 'https://www.placecage.com/300/300';
+    private cageImgUrl = 'https://www.placecage.com/300/';
 
     generatedFakeEvents:FakeEvent[] = [
         new FakeEvent(
             'JS powa event' ,
             new Date(),
             'Some description here',
-            this.cageImgUrl
+            this.cageImgUrl + '200'
         ),
         new FakeEvent(
             'Another JS framework relased' ,
             new Date(),
             'Some description here',
-            this.cageImgUrl
+            this.cageImgUrl + '400'
         ),
         new FakeEvent(
             'JS Coercion for dummies' ,
             new Date(),
             'You are not prepared!...',
-            this.cageImgUrl
+            this.cageImgUrl + '300'
         )
     ];
 
@@ -108,7 +108,7 @@ export class FakeEventsDataService{
                     'Event' + i,
                     new Date(dateToMutate.setDate(dateToMutate.getDate() - 2)),
                     'Some description ' + i,
-                    this.cageImgUrl
+                    this.cageImgUrl + ((i > 0 && i < 7) ? i+'00' : '300')
                 );
                 this.generatedFakeEvents.push(event);
             }

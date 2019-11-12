@@ -1,0 +1,21 @@
+@import '../../shared/scss/calendar.config';
+
+.daily-view{
+    &__hours-list{
+        list-style: none;
+        li{
+            padding:10px 10px;
+            display: block;
+            position: relative;
+            &::after{
+                content: "";
+                position: absolute;
+                top: 45%; // must coordinate with list padding above
+                left: 30px;
+                width: 80%;
+                height: 2px;
+                background-color: palette(grey, x-light);
+            }
+        }
+    }
+}

@@ -47,7 +47,6 @@
             display: none;
             visibility: hidden;
             position: absolute;
-            display: flex;
             flex-wrap: wrap;
             top:30px;
             left:0;
@@ -57,7 +56,7 @@
         }
         &.displayed{
             .event-template-list{
-                display: inherit;
+                display: flex;
                 visibility: visible;
             }
         }

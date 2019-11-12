@@ -52,7 +52,6 @@ export class CalendarTableComponent {
     }
 
     toggleDisplayingOfEvents(rowIndex, colIndex:number):void{
-        console.log(colIndex)
         if(this.currentDisplayedEventsCell.column == colIndex && this.currentDisplayedEventsCell.row == rowIndex){
             this.currentDisplayedEventsCell.column = -1;
             this.currentDisplayedEventsCell.row = -1;
