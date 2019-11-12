@@ -1,4 +1,4 @@
-
+@import '../../shared/scss/calendar.config';
 
 .calendar-table-cell{
 
@@ -15,7 +15,7 @@
     text-align: center;
     &.has-events{
         &:hover{
-            background:antiquewhite;
+            background:palette(grey, x-light);
         }
     }
     &.has-events > &__content{
@@ -24,14 +24,20 @@
     &__content{
         position:relative;
         display:flex;
+        padding: 10px 0;
         .cell-date-num{
             display:inline-block;
         }
         .cell-events-tag{
-            font-size: 14px;
+            font-size: 10px;
             display:inline-block;
             padding:10px;
             border-radius: 999px;
+            background-color: palette(grey, light); 
+            color:$white;
+            position: absolute;
+            right: 0px;
+            bottom: 5px;
             &.hidden{
                 display:none;
                 visibility: hidden;
@@ -47,7 +53,7 @@
             left:0;
             max-width: 330px;
             box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
-            background-color: #fff;
+            background-color: $white;
         }
         &.displayed{
             .event-template-list{

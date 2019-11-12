@@ -95,7 +95,7 @@ export class FakeEventsDataService{
                 }
             }
         }
-        return of(foundEvents).pipe(delay(800), tap(console.log));
+        return of(foundEvents).pipe(delay(100));
     }
 
     private _generateEventsBasedOnCurrentDate(){
@@ -113,7 +113,6 @@ export class FakeEventsDataService{
                 this.generatedFakeEvents.push(event);
             }
         }
-        console.log(this.generatedFakeEvents)
     }
 
 }
