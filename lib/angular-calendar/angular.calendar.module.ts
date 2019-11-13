@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // containers
 import { AngularCalendarComponent } from './containers/angular-calendar/angular-calendar.component';
+import { EventPopupContainerComponent } from './containers/event-popup-container/event-popup-container.component';
 
 // components
 import { WeeklyViewComponent } from './components/weekly-view/weekly-view.component';
@@ -20,6 +21,9 @@ import { AngularCalendaFooterDirective } from './directives/anuglar-calendar-foo
 import { CurrentDateDisplayed } from './pipes/current-date-displayed/current-date-displayed.pipe';
 import { MatchTwoStringsPipe } from './pipes/match-two-strings/match-two-strings.pipe';
 
+// services
+import { DomRiftService } from 'lib/rift/dom-rift.service';
+
 @NgModule({
     imports: [
         CommonModule
@@ -35,9 +39,11 @@ import { MatchTwoStringsPipe } from './pipes/match-two-strings/match-two-strings
         CurrentDateDisplayed,
         MatchTwoStringsPipe,
         CalendarLoadingSpinnerComponent,
-        EventBadgeComponent
+        EventBadgeComponent,
+        EventPopupContainerComponent
     ],
     exports: [AngularCalendarComponent, AngularCalendarHeadingDirective, AngularCalendaFooterDirective],
-    providers: []
+    entryComponents: [EventPopupContainerComponent],
+    providers: [DomRiftService]
 })
 export class AngularCalendarModule {}

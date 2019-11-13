@@ -3,6 +3,9 @@ import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-cale
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, filter, } from 'rxjs/operators';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
+import { DomRiftService } from 'lib/rift/dom-rift.service';
+import { EventPopupContainerComponent } from '../event-popup-container/event-popup-container.component';
+import { RiftConfig } from 'lib/rift/config/rift.config';
 
 export interface AngularDateConfig  {
    startDate: Date;
@@ -21,7 +24,7 @@ export class AngularCalendarDateChange implements  AngularDateConfig{
     constructor(
       public startDate: Date,
       public endDate:Date,
-      public timespan:AngularCalendarTimeSpan
+      public timespan:AngularCalendarTimeSpan,
       ) {}
 }
 
@@ -36,7 +39,9 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
 export class AngularCalendarComponent implements OnDestroy, OnInit{
 
     constructor(
-        @Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig ) {
+        @Optional() @Inject(ANGULAR_CALENDAR_CONFIG) private _injectedConfig : AngularCalendarConfig,
+        private _riftService:DomRiftService
+        ) {
         this.configOptions = new AngularCalendarConfig();
         if(this._injectedConfig){
           this.configOptions = {...this.configOptions, ..._injectedConfig};
@@ -190,6 +195,22 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
       this._currentTrackedDay = new Date(this._currentTrackedDay.setDate( (change==='prev') ? -1 : maxDaysInCurrentMonth + 2 )   );
     }      
   }
+
+  handleOpenEventsPopup(e:any){
+    // const riftConfig: RiftConfig<EventPopupContainerComponent> = {
+    //     riftClass: 'additional-class',
+    //     hasBackdrop: true,
+    //     data: { },
+    //     component: EventPopupContainerComponent,
+    //     viewContainerRef: this._vCRef,
+    //     elRef: this._elRef
+    // }
+    // const riftRef = this._riftService.createRift<EventPopupContainerComponent>(riftConfig);
+    // return riftRef.subscribe(c => {
+    //     console.log("closing", c);
+
+    // })
+}
 
 
 }
