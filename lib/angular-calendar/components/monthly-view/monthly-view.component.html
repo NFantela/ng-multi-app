@@ -8,7 +8,8 @@
       calendar-table
       [rows]="weekCells"
       [eventTemplate]="eventTemplate"
-      [firstWeekOffset]="firstWeekOffset">
+      [firstWeekOffset]="firstWeekOffset"
+      (clickedShowEvents)="passClickedShowEvents($event)">
     </tbody>
 </table>
   

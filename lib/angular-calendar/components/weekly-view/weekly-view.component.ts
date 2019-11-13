@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, TemplateRef, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { AngularDateConfig, AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 import { AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
@@ -40,8 +40,15 @@ export class WeeklyViewComponent {
     @Input()
     eventTemplate: TemplateRef<any> | undefined;
 
+    @Output()
+    passClickedEvents:EventEmitter<{events:any[], origin:HTMLElement, vcr: ViewContainerRef}> = new EventEmitter();
+
     // data to be passed to calendar table as rows
     dayCells : Array<AngularCalendarCell[]>;
+
+    passClickedShowEvents(e){
+        this.passClickedEvents.emit(e);
+    }
 
     private _generateDaysCells(dates:AngularDateConfig, eventData:AngularCalendarData<any> = null){
         // we need arrays in arrays to generate 

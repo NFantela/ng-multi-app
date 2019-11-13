@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, TemplateRef, ViewContainerRef, Output, EventEmitter } from '@angular/core';
 import { AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { AngularCalendarCell } from 'lib/angular-calendar/containers/angular-cal
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarTableComponent {
-    constructor() {}
+    constructor( private _vcr:ViewContainerRef) {}
 
     offsetCells:number[] = [];
     lastRowOffsetCells:number[] = [];
@@ -19,7 +19,9 @@ export class CalendarTableComponent {
 
     @Input()
     eventTemplate: TemplateRef<any> | undefined;
-
+    
+    @Output()
+    clickedShowEvents:EventEmitter<{events:any[], origin:HTMLElement, vcr: ViewContainerRef}> = new EventEmitter();
     @Input() 
     set rows(val:Array<AngularCalendarCell[]>){
         if(val && val.length){
@@ -58,6 +60,13 @@ export class CalendarTableComponent {
         } else {
             this.currentDisplayedEventsCell.column = colIndex;
             this.currentDisplayedEventsCell.row = rowIndex;
+        }
+    }
+
+
+    showEvents(events:any[], origin:HTMLElement){
+        if(events && events.length){
+            this.clickedShowEvents.emit({events, origin, vcr: this._vcr});
         }
     }
 

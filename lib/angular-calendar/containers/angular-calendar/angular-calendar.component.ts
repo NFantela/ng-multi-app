@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, filter, } from 'rxjs/operators';
@@ -196,20 +196,21 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
     }      
   }
 
-  handleOpenEventsPopup(e:any){
-    // const riftConfig: RiftConfig<EventPopupContainerComponent> = {
-    //     riftClass: 'additional-class',
-    //     hasBackdrop: true,
-    //     data: { },
-    //     component: EventPopupContainerComponent,
-    //     viewContainerRef: this._vCRef,
-    //     elRef: this._elRef
-    // }
-    // const riftRef = this._riftService.createRift<EventPopupContainerComponent>(riftConfig);
-    // return riftRef.subscribe(c => {
-    //     console.log("closing", c);
+  handleOpenEventsPopup(e:{events:any[], origin:any, vcr: ViewContainerRef}){
+    console.log(e);
+    const riftConfig: RiftConfig<EventPopupContainerComponent> = {
+        riftClass: 'additional-class',
+        hasBackdrop: true,
+        data: { },
+        component: EventPopupContainerComponent,
+        viewContainerRef: e.vcr,
+        elRef: e.origin
+    }
+    const riftRef = this._riftService.createRift<EventPopupContainerComponent>(riftConfig);
+    return riftRef.subscribe(c => {
+        console.log("closing", c);
 
-    // })
+    })
 }
 
 

@@ -8,7 +8,11 @@
 </ng-container>
 
   <td *ngFor="let item of row; let colIndex = index" class="calendar-table-cell" [class.has-events]="item?.events.length">
-      <div class="calendar-table-cell__content"  [class.displayed]="currentDisplayedEventsCell.column == colIndex && currentDisplayedEventsCell.row == rowIndex" (click)="toggleDisplayingOfEvents(rowIndex, colIndex)">
+      <div 
+        #origin
+        class="calendar-table-cell__content"  
+        [class.displayed]="currentDisplayedEventsCell.column == colIndex && currentDisplayedEventsCell.row == rowIndex" 
+        (click)="showEvents(item.events, origin)">
         <span class="cell-date-num" >{{item.value }}</span>
         <event-badge [hidden]="!item.events.length">{{item?.events.length}}</event-badge>
 

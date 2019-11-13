@@ -55,7 +55,8 @@
                     [eventData]="eventData"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
-                    *ngSwitchCase="'month'">
+                    *ngSwitchCase="'month'"
+                    (passClickedEvents)="handleOpenEventsPopup($event)">
                 </monthly-view>
                 <weekly-view
                     [eventTemplate]="eventTemplate"
@@ -63,7 +64,8 @@
                     [eventData]="eventData"
                     [dateInformation]="dateData"
                     [calendarConfig]="configOptions"
-                    *ngSwitchCase="'week'">
+                    *ngSwitchCase="'week'"
+                    (passClickedEvents)="handleOpenEventsPopup($event)">
                 </weekly-view>
                 <daily-view
                     [eventTemplate]="eventTemplate"
