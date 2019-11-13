@@ -2,7 +2,8 @@
   <ul class="daily-view__hours-list">
     <li *ngFor="let hourItem of hourItems">
       <span class="hour"></span>{{ hourItem.display }}
-      <span *ngFor="let event of hourItem.events" class="event">{{ event| json}}</span>
+      <event-badge [inCalendarCell]="false" *ngFor="let event of hourItem.events">2</event-badge>
+
     </li>
   </ul>
 </div>
