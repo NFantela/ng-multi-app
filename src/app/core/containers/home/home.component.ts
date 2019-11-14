@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { FakeEvent } from 'lib/angular-calendar/models/fake-event';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
 import { map, switchMap, filter, tap, delay } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 export class MyCustomCalendarEvent {
     constructor(public somName:string){}
@@ -40,5 +41,11 @@ export class HomeComponent {
     }
 
     otherStartDate = new Date('December 17, 1995 03:24:00');
+
+
+    // forms for timepicker
+    hoursInput = new FormControl('13');
+    minutesInput = new FormControl('22');
+    secondsInput = new FormControl(54);
 
 }

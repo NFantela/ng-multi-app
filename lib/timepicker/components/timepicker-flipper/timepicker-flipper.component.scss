@@ -1,0 +1,41 @@
+.timepicker{
+    &__timeflipper{
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+        &:focus{
+          outline:none;
+        }
+        &-time{
+          justify-content: center;
+          color:rgba(0,0,0,.8);
+          font-size: 35px;
+          margin: 10px 0;
+          text-align: center;
+        }
+    }
+}
+/*  arrows */
+.arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    cursor:pointer;
+  }
+  .arrow-up {
+    border-bottom: 50px solid rgba(0,0,0,.35);
+    &:hover{
+      border-bottom: 50px solid rgb(44,44,44);
+    }
+  }
+  
+  .arrow-down {
+    border-top: 50px solid rgba(0,0,0,.35);
+    &:hover{
+      border-top: 50px solid rgb(44,44,44);
+    }
+  }
+.timepicker__timeflipper.isFocused{
+  background: rgb(230, 230, 230);
+}

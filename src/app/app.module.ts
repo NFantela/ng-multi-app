@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 // ngrx store
@@ -27,6 +28,8 @@ import { HomeComponent } from './core/containers/home/home.component';
 import { DemoAdminModule } from './demo-admin/demo-admin.module';
 import { AngularCalendarModule } from 'lib/angular-calendar/angular.calendar.module';
 import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-calendar.config';
+import { TimepickerModule } from 'lib/timepicker/timepicker-module';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-cal
       logOnly: environment.production
     }),
     DemoAdminModule,
-    AngularCalendarModule
+    AngularCalendarModule,
+    TimepickerModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
