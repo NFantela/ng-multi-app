@@ -16,14 +16,6 @@
         <span class="cell-date-num" >{{item.value }}</span>
         <event-badge [hidden]="!item.events.length">{{item?.events.length}}</event-badge>
 
-        <div *ngIf="eventTemplate" class="event-template-list">
-          <div *ngFor="let event of item.events">
-            <ng-container 
-              *ngTemplateOutlet="eventTemplate; context: {$implicit: event.item}">
-           </ng-container>
-          </div>
-        </div>
-
       </div>
   </td>
   <!-- last row -->

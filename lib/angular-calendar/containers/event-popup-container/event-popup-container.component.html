@@ -1,3 +1,15 @@
-<div>
-    Hello this is event popup container
+<div class="event-popup-container">
+
+    <div *ngIf="eventTemplate; else noTemplate" class="event-template-list">
+        <div *ngFor="let event of events">
+          <ng-container 
+            *ngTemplateOutlet="eventTemplate; context: {$implicit: event.item}">
+         </ng-container>
+        </div>
+      </div>
+
+    <ng-template #noTemplate>
+      <h3>Number of events on selected date: {{ events.length }} </h3>
+    </ng-template>
+      
 </div>

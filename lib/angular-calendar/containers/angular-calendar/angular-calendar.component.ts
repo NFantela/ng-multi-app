@@ -197,11 +197,10 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
   }
 
   handleOpenEventsPopup(e:{events:any[], origin:any, vcr: ViewContainerRef}){
-    console.log(e);
     const riftConfig: RiftConfig<EventPopupContainerComponent> = {
         riftClass: 'additional-class',
         hasBackdrop: true,
-        data: { },
+        data: { template : this.eventTemplate, events: e.events},
         component: EventPopupContainerComponent,
         viewContainerRef: e.vcr,
         elRef: e.origin

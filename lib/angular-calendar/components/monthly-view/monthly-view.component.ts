@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef, Output, EventEmitter, ViewContainerRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { AngularDateConfig, AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 import { AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
@@ -36,9 +36,6 @@ export class MonthlyViewComponent {
 
     @Output()
     passClickedEvents:EventEmitter<{events:any[], origin:HTMLElement, vcr: ViewContainerRef}> = new EventEmitter();
-
-    @Input()
-    eventTemplate: TemplateRef<any> | undefined;
 
     // data to be passed to calendar table as rows
     weekCells : Array<AngularCalendarCell[]>;

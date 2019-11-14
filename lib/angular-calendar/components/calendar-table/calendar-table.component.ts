@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef, ViewContainerRef, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewContainerRef, Output, EventEmitter } from '@angular/core';
 import { AngularCalendarCell } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 
 @Component({
@@ -16,9 +16,6 @@ export class CalendarTableComponent {
     currentDisplayedEventsCell = {row: -1 , column: -1};
 
     @Input() numCols = 7;
-
-    @Input()
-    eventTemplate: TemplateRef<any> | undefined;
     
     @Output()
     clickedShowEvents:EventEmitter<{events:any[], origin:HTMLElement, vcr: ViewContainerRef}> = new EventEmitter();

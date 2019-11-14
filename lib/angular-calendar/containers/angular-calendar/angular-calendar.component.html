@@ -50,7 +50,6 @@
             </calendar-loading-spinner>
 
                 <monthly-view
-                    [eventTemplate]="eventTemplate"
                     [labels]="weekDayLabels"
                     [eventData]="eventData"
                     [dateInformation]="dateData"
@@ -59,7 +58,6 @@
                     (passClickedEvents)="handleOpenEventsPopup($event)">
                 </monthly-view>
                 <weekly-view
-                    [eventTemplate]="eventTemplate"
                     [labels]="weekDayLabels"
                     [eventData]="eventData"
                     [dateInformation]="dateData"
@@ -68,10 +66,10 @@
                     (passClickedEvents)="handleOpenEventsPopup($event)">
                 </weekly-view>
                 <daily-view
-                    [eventTemplate]="eventTemplate"
                     [dateInformation]="dateData"
                     [eventData]="eventData"
-                    *ngSwitchCase="'day'">
+                    *ngSwitchCase="'day'"
+                    (passClickedEvents)="handleOpenEventsPopup($event)">
                 </daily-view>
 
         </div>

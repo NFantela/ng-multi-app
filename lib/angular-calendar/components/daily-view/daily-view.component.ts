@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { AngularDateConfig } from 'lib/angular-calendar/containers/angular-calendar/angular-calendar.component';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
 
@@ -10,7 +10,8 @@ type HourItem = {display: string, value:number, events:any[]};
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyViewComponent {
-    constructor() {}
+
+    constructor(private _vcr:ViewContainerRef) {}
 
     @Input()
     set dateInformation(v:AngularDateConfig | null){
@@ -22,16 +23,20 @@ export class DailyViewComponent {
     private _dateInformation:AngularDateConfig;
 
     @Input()
-    eventTemplate: TemplateRef<any> | undefined;
-
-    @Input()
     set eventData(evData:AngularCalendarData<any>){
         if(evData){
             this._generateHourItems(this._dateInformation, evData);
         }
     }
+
+    @Output()
+    passClickedEvents:EventEmitter<{events:any[], origin:HTMLElement, vcr: ViewContainerRef}> = new EventEmitter();
     /* Array to loop in template to generate hour lines */
     hourItems:Array<HourItem> = [];
+
+    showEvents(event:any, origin:HTMLElement){
+        this.passClickedEvents.emit({events : [event], origin, vcr: this._vcr});
+    }
 
     private _generateHourItems(dateConfig: AngularDateConfig,  data:AngularCalendarData<any> = null){
         // we have 24 hours in a day

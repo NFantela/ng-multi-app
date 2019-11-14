@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, TemplateRef } from '@angular/core';
+import { DomRiftReference } from 'lib/rift/dom-rift.ref';
 
 @Component({
     selector: 'event-popup-container',
@@ -7,5 +8,29 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventPopupContainerComponent {
-    constructor() {}
+
+    eventTemplate:TemplateRef<any> = null;
+    events:any[] = [];
+
+    @Input()
+    set domRiftRef(v:DomRiftReference){
+        if(v){
+            this._domRiftRef = v;
+            this._configData = v.riftConfigData;
+            if(this._configData){
+                this.eventTemplate = this._configData.template;
+                this.events = this._configData.events;
+
+                console.log(this.eventTemplate, this.events);
+            }
+        }
+    };
+    get domRiftRef():DomRiftReference{ return this._domRiftRef; }
+    private _domRiftRef:DomRiftReference;
+
+    private _configData:any;
+
+    // selectTime(){
+    //     this.domRiftRef.close({timepickerTime: this.timepickerTime});
+    // }
 }
