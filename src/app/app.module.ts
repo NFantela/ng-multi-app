@@ -56,13 +56,13 @@ import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-cal
           monthly : 'mjesecno'
         },
         weekDayLabels: [
-          {monday: 'ponediljak'},
-          {tuesday: 'utorak'},
-          {wednesday: 'wednesday'},
-          {thursday: 'thursday'},
-          {friday: 'friday'},
-          {saturday: 'saturday'},
-          {sunday: 'sunday'}
+          {monday: 'pon'},
+          {tuesday: 'uto'},
+          {wednesday: 'sri'},
+          {thursday: 'čet'},
+          {friday: 'pet'},
+          {saturday: 'sub'},
+          {sunday: 'ned'}
         ]
       }
     }

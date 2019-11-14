@@ -16,6 +16,7 @@ html input[disabled] {
 
 
 .btn {
+	cursor: pointer;
 	padding: 15px 30px;
 	border: 0;
 	border-radius : 5px;
@@ -23,11 +24,11 @@ html input[disabled] {
 	text-transform: uppercase;
 	font-size : em(14px);
 	font-weight: 400;
-	background-color: transparent;
 	transition: opacity .3s;
 	margin-bottom: 2em;
+	background-color: palette(grey, xx-light);
 	&:hover {
-	  opacity: .75;
+	  opacity: .65;
 	}
 	&:active {
 	  opacity: initial;

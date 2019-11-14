@@ -10,10 +10,10 @@
             &::after{
                 content: "";
                 position: absolute;
-                top: 45%; // must coordinate with list padding above
-                left: 30px;
-                width: 80%;
-                height: 2px;
+                top: 50%; // must coordinate with list padding above
+                left: 3%;
+                width: 96%;
+                height: 1px;
                 background-color: palette(grey, x-light);
             }
         }

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ContentChild, TemplateRef, EventEmitter, Output, Inject, Optional, OnDestroy, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ANGULAR_CALENDAR_CONFIG, AngularCalendarConfig } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, filter, } from 'rxjs/operators';
@@ -34,7 +34,8 @@ export type  AngularCalendarTimeSpan = 'day' | 'week' | 'month';
     selector: 'angular-calendar',
     styleUrls: ['../../shared/scss/angular.calendar.scss', 'angular-calendar.component.scss'],
     templateUrl: 'angular-calendar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class AngularCalendarComponent implements OnDestroy, OnInit{
 
@@ -206,10 +207,6 @@ export class AngularCalendarComponent implements OnDestroy, OnInit{
         elRef: e.origin
     }
     const riftRef = this._riftService.createRift<EventPopupContainerComponent>(riftConfig);
-    return riftRef.subscribe(c => {
-        console.log("closing", c);
-
-    })
 }
 
 

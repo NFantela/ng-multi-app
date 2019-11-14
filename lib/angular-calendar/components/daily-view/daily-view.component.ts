@@ -35,7 +35,8 @@ export class DailyViewComponent {
     hourItems:Array<HourItem> = [];
 
     showEvents(event:any, origin:HTMLElement){
-        this.passClickedEvents.emit({events : [event], origin, vcr: this._vcr});
+        // TODO WRONG FORMAT HERE 
+        this.passClickedEvents.emit({events : [{item:event, dateForItem:null}], origin, vcr: this._vcr});
     }
 
     private _generateHourItems(dateConfig: AngularDateConfig,  data:AngularCalendarData<any> = null){
