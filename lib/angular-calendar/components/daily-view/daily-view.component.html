@@ -1,11 +1,11 @@
 <div class="daily-view">
   <ul class="daily-view__hours-list">
     <li *ngFor="let hourItem of hourItems" #origin>
-      <span class="hour"></span>{{ hourItem.display }}
+      <span class="hour">{{ hourItem.display }}</span>
       <event-badge 
         [inCalendarCell]="false" 
         *ngFor="let event of hourItem.events"
-        (click)="showEvents(event, origin)">2
+        (click)="showEvents(event, origin)">1
       </event-badge>
 
     </li>

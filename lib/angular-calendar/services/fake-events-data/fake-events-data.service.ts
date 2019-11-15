@@ -95,7 +95,7 @@ export class FakeEventsDataService{
                 }
             }
         }
-        return of(foundEvents).pipe(delay(100));
+        return of(foundEvents).pipe(delay(800));
     }
 
     private _generateEventsBasedOnCurrentDate(){

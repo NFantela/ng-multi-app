@@ -4,7 +4,7 @@ import { FakeEventsDataService } from 'lib/angular-calendar/services/fake-events
 import { Observable, BehaviorSubject } from 'rxjs';
 import { FakeEvent } from 'lib/angular-calendar/models/fake-event';
 import { AngularCalendarData } from 'lib/angular-calendar/models/angular-calendar-data';
-import { map, switchMap, filter, tap, delay } from 'rxjs/operators';
+import { map, switchMap, filter, tap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
 export class MyCustomCalendarEvent {
@@ -13,7 +13,8 @@ export class MyCustomCalendarEvent {
 
 @Component({
     selector: 'home',
-    templateUrl: 'home.component.html'
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.scss'],
 })
 export class HomeComponent {
 
@@ -26,8 +27,6 @@ export class HomeComponent {
         filter(v => !!v),
         switchMap(val =>  {
            return  this._fakeEventsService.getEvents(val).pipe(
-            tap(() => this.loadingData = true),
-            delay(700),
                 map(fakeEvents => {
                     return new AngularCalendarData<FakeEvent>(fakeEvents, 'eventDate');
                 }),
@@ -38,6 +37,8 @@ export class HomeComponent {
 
     handleDateChange(e:AngularCalendarDateChange){
         this.events.next(e);
+        // avoiding changed error
+        Promise.resolve().then(() => this.loadingData = true);
     }
 
     otherStartDate = new Date('December 17, 1995 03:24:00');

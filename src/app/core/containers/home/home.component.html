@@ -2,7 +2,7 @@
     <h1> Hello this is home Component </h1>
     <h3> Here there will be links to other stuff and lazy loaded other modules </h3>
 
-    <div style="max-width:1000px; margin: 0 auto;">
+    <div style="max-width:1000px; margin: 0 auto;" class="center-align">
                 <h2>Angular Calendar Demo</h2>
                 <p>Accepts multiple inputs & config options</p>
             <angular-calendar
@@ -30,50 +30,68 @@
                     <p>Connected to either reactive or regular input field. Accepts keyboard arrows input</p>
                 <h3>Reactive forms example</h3>
                 <div class="row-inputs">
-                <label>
-                  hours
-                <input 
-                type="text" 
-                timepicker="hours"
-                [formControl]="hoursInput" 
-                [timepickerFieldControl]="hoursInput"/>
-                </label>
-                <label>
-                  Minutes
-                  <input 
-                    type="text" 
-                    timepicker="minutes"
-                    [formControl]="minutesInput" 
-                    [timepickerFieldControl]="minutesInput"/>
-                </label>
-              <label>
-               Seconds
-                <input 
-                type="number" 
-                timepicker="seconds"
-                [formControl]="secondsInput" 
-                [timepickerFieldControl]="secondsInput"/>      
-              </label>
+                  <div class="row-inputs__input">
+                      <label>
+                          hours
+                        <input 
+                        type="text" 
+                        timepicker="hours"
+                        [formControl]="hoursInput" 
+                        [timepickerFieldControl]="hoursInput"/>
+                        </label>
+                   </div>
+                   <div class="row-inputs__input">
+                      <label>
+                          Minutes
+                          <input 
+                            type="text" 
+                            timepicker="minutes"
+                            [formControl]="minutesInput" 
+                            [timepickerFieldControl]="minutesInput"/>
+                      </label>                     
+                   </div>
+                   <div class="row-inputs__input">
+                      <label>
+                          Seconds
+                           <input 
+                           type="number" 
+                           timepicker="seconds"
+                           [formControl]="secondsInput" 
+                           [timepickerFieldControl]="secondsInput"/>      
+                         </label>
+                   </div>
+
+
                 </div>
               </section>
         
               <section class="row">
                 <h3>Regular input fields</h3>
                 <div class="row-inputs">
-                <input 
-                  type="text" 
-                  timepicker="hours" 
-                  value="12"/>
-                <input 
-                type="number" 
-                timepicker="minutes" 
-                value="23"/>
-                <input 
-                type="number" 
-                timepicker="seconds" 
-                value="23"/>
+                    <div class="row-inputs__input">
+                        <input 
+                        type="text" 
+                        timepicker="hours" 
+                        value="12"/>
+                    </div>
+                    <div class="row-inputs__input">
+                        <input 
+                        type="number" 
+                        timepicker="minutes" 
+                        value="12"/>
+                    </div>
+                    <div class="row-inputs__input">
+                        <input 
+                        type="number" 
+                        timepicker="seconds" 
+                        value="12"/>
+                    </div>
+
                 </div>
               </section>
+
+             
+              <h3>Here is a link to NGRX povered Lazy loaded APP:</h3>
            
     </div>
 

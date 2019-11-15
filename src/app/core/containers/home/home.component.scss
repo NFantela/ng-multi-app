@@ -1,0 +1,12 @@
+@import '../../../../scss/modules/inputs';
+@import '../../../../scss/utilities/config';
+.home{
+    text-align: center;
+    .row-inputs{
+        display: flex;
+        &__input{
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+    }
+}

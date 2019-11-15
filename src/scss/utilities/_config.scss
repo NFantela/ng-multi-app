@@ -37,6 +37,7 @@ $color-shadow    : rgba($black, .2);
 // Color Palette Modifiers
 $color-palettes: (
 	grey: (
+		xxx-light : lighten($grey, 48%),
 		xx-light : lighten($grey, 43%),
 		x-light  : lighten($grey, 35%),
 	  light    : lighten($grey, 12%),
