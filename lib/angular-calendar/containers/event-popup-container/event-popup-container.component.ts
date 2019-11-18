@@ -20,8 +20,6 @@ export class EventPopupContainerComponent {
             if(this._configData){
                 this.eventTemplate = this._configData.template;
                 this.events = this._configData.events;
-
-                console.log(this.eventTemplate, this.events);
             }
         }
     };

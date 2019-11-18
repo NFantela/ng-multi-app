@@ -2,6 +2,15 @@
 // Mixins
 // ==========================================================================
 
+/* Generate modifier color classes */
+
+@mixin bg-colors($map) {
+	@each $theme, $color in $map {
+		&--#{$theme} {
+			background-color: $color;    
+		}
+	}
+}
 
 // Media queries
 @mixin mq($break) {
@@ -25,15 +34,7 @@
   }
 }
 
-// Generate modifier color classes
 
-@mixin bg-colors($map) {
-	@each $theme, $color in $map {
-		&--#{$theme} {
-			background-color: $color;    
-		}
-	}
-}
 
 // Generating :before or :after pseudo-element shapes
 @mixin p-el($el, $el-w: null, $el-h: null) {

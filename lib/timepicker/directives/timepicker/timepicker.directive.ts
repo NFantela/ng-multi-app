@@ -71,7 +71,6 @@ const INPUT_TYPES  = {
             }
             const riftRef = this._riftService.createRift<TimepickerContainerComponent>(riftConfig);
             return riftRef.subscribe(c => {
-                console.log("closing", c);
                 if(c.data && c.data.timepickerTime){
                     this._setCurrentTime(c.data.timepickerTime);
                     this._patchFormValue();

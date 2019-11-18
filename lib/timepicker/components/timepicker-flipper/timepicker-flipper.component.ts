@@ -46,7 +46,6 @@ export class TimepickerFlipperComponent {
     }
 
     onKeyDown(e:KeyboardEvent){
-        console.log("executing", e)
         const handlers = {
             ArrowDown: () => this.changeTime('decrement'),
             ArrowUp: () => this.changeTime('increment')
