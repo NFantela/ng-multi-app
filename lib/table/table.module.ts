@@ -8,16 +8,18 @@ import { HeaderRowComponent } from './containers/components/header-row/header-ro
 import { Row } from './containers/components/row/row.component';
 
 // directives
-import { DataRowOutlet, FooterRowOutlet, HeaderRowOutlet } from './directives/row.directives';
+import { AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef, AnHeaderCell, AnFooterCell, AnCell } from './directives/cell/cell.directives';
 
+const EXPORTS = [TableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef, AnHeaderCell, AnFooterCell, AnCell];
 
 @NgModule({
     imports: [],
     declarations: [
-        TableComponent, DataRowOutlet, FooterRowOutlet, HeaderRowOutlet,
-        FooterRowComponent, HeaderRowComponent, Row
+        TableComponent, 
+        FooterRowComponent, HeaderRowComponent, Row,
+        ...EXPORTS
     ],
-    exports: [TableComponent],
+    exports: EXPORTS,
     providers: []
 })
 export class TableModule {}
