@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
 @Component({
     selector: 'an-row, tr[an-row]',
-    template: `<ng-container cdkCellOutlet></ng-container>`,
+    template: `<ng-container anCellOutlet></ng-container>`,
     host: {
       'class': 'an-row',
       'role': 'row',

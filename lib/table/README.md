@@ -1,6 +1,6 @@
 ### TABLE EXAMPLE
 
-<table mat-table [dataSource]="dataSource" class="whatever">
+<table table [dataSource]="dataSource" class="whatever">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -27,7 +27,33 @@
 -------------------------------------------------------------------------
 ### MY VERSION 
 
+## Description
+#  CELL
+ 1) an-header-cell, an-footer-cell, an-cell, - DIRECTIVES used to apply correct CSS classes to their native element
+
+ 2) anColumnDef - DIRECTIVE is basicaly a parent to AnCellDef, AnheaderCell, AnFooterCellDef - they all access him to get cssClassFriendlyName and apply it to its element
+
+ 3) *anCellDef, *anHeaderCellDef, *anFooterCellDef - DIRECTIVES are used to expose their <ng-template> TemplateRef<any> and accept context & other data;
+
+# ROW
+
+<!-- Table is component containeing 
+        <ng-content select="caption"></ng-content>
+        <ng-container headerRowOutlet></ng-container>
+        <ng-container rowOutlet></ng-container>
+        <ng-container footerRowOutlet></ng-container>
+-->
+<table ang-table [dataSource]="dataSource" class="whatever"> 
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
   <ng-container anColumnDef="position">
     <th an-header-cell *anHeaderCellDef> No. </th>
     <td an-cell *anCellDef="let element"> {{element.position}} </td>
   </ng-container>
+
+<!-- Borh header-row & row are components whose templaet is <ng-container anCellOutlet></ng-container>-->
+  <tr header-row *anHeaderRowDef="displayedColumns"></tr> <!-- anHeaderRowDef captures -->
+  <tr row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
