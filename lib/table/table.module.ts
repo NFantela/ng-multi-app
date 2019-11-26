@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
+
 // containers
-import { TableComponent } from './containers/table/table.component';
+import { AnTableComponent } from './containers/an-table/an-table.component';
 
 // components
-import { FooterRowComponent } from './containers/components/footer-row/footer-row.component';
-import { HeaderRowComponent } from './containers/components/header-row/header-row.component';
-import { Row } from './containers/components/row/row.component';
+
 
 // directives
-import { AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef, AnHeaderCell, AnFooterCell, AnCell } from './directives/cell/cell.directives';
 
-const EXPORTS = [TableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef, AnHeaderCell, AnFooterCell, AnCell];
+
+const EXPORTS = [AnTableComponent];
 
 @NgModule({
     imports: [],
     declarations: [
-        TableComponent, 
-        FooterRowComponent, HeaderRowComponent, Row,
+        AnTableComponent,
         ...EXPORTS
     ],
     exports: EXPORTS,
     providers: []
 })
-export class TableModule {}
+export class AnTableModule {}

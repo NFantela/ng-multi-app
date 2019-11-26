@@ -36,6 +36,10 @@
  3) *anCellDef, *anHeaderCellDef, *anFooterCellDef - DIRECTIVES are used to expose their <ng-template> TemplateRef<any> and accept context & other data;
 
 # ROW
+4) rowOutlet, headerRowOutlet, footerRowOutlet DIRECTIVES - used in table template to grab <ng-containers> to insert rows
+
+5) anHeaderRowDef, anFooterRowDef - they have columns: Iterable<string> - store IterableDiffer and can check anColumnDef (header / footer / cell)
+    - andRowDef  -Captures the header row's template and other row properties such as the columns to display and a when predicate that describes when this row should be used.
 
 <!-- Table is component containeing 
         <ng-content select="caption"></ng-content>
