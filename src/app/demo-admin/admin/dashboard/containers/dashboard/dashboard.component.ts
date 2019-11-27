@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
     selector: 'admin-dashboard',
     template: `
         <div>
-        <table an-table>
-
+        <table an-table role="presentation">
+            <caption>This is table caption </caption>
 
       
     <!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

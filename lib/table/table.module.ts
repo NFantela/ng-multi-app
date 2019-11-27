@@ -7,6 +7,7 @@ import { AnTableComponent } from './containers/an-table/an-table.component';
 
 
 // directives
+import { AnDataRowOutlet, AnHeaderRowOutlet, AnFooterRowOutlet } from './directives/outlet.directives';
 
 
 const EXPORTS = [AnTableComponent];
@@ -15,6 +16,9 @@ const EXPORTS = [AnTableComponent];
     imports: [],
     declarations: [
         AnTableComponent,
+        AnDataRowOutlet,
+        AnHeaderRowOutlet,
+        AnFooterRowOutlet,
         ...EXPORTS
     ],
     exports: EXPORTS,
