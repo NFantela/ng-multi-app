@@ -59,5 +59,5 @@
 
 <!-- Borh header-row & row are components whose templaet is <ng-container anCellOutlet></ng-container>-->
   <tr header-row *anHeaderRowDef="displayedColumns"></tr> <!-- anHeaderRowDef captures -->
-  <tr row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr row *anRowDef="let row; columns: displayedColumns;"></tr>
 </table>

@@ -4,13 +4,14 @@ import { NgModule } from '@angular/core';
 import { AnTableComponent } from './containers/an-table/an-table.component';
 
 // components
-
+import { AnHeaderRow, AnFooterRow, AnRow } from './components/row/row.components';
 
 // directives
 import { AnDataRowOutlet, AnHeaderRowOutlet, AnFooterRowOutlet } from './directives/outlet.directives';
+import { AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef } from './directives/column.directives';
 
 
-const EXPORTS = [AnTableComponent];
+const EXPORTS = [AnTableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef];
 
 @NgModule({
     imports: [],
@@ -19,6 +20,9 @@ const EXPORTS = [AnTableComponent];
         AnDataRowOutlet,
         AnHeaderRowOutlet,
         AnFooterRowOutlet,
+        AnHeaderRow,
+        AnFooterRow,
+        AnRow,
         ...EXPORTS
     ],
     exports: EXPORTS,

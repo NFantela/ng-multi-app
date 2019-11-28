@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject, Attribute } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject, Attribute, ContentChildren, QueryList } from '@angular/core';
 import { AnDataRowOutlet, AnHeaderRowOutlet, AnFooterRowOutlet } from 'lib/table/directives/outlet.directives';
 import { DOCUMENT } from '@angular/common';
+import { AnColumnDef } from 'lib/table/directives/column.directives';
 
 @Component({
     selector: 'table[an-table]',
@@ -22,6 +23,15 @@ export class AnTableComponent implements OnInit {
   @ViewChild(AnDataRowOutlet, {static: true}) _rowOutlet: AnDataRowOutlet;
   @ViewChild(AnHeaderRowOutlet, {static: true}) _headerRowOutlet: AnHeaderRowOutlet;
   @ViewChild(AnFooterRowOutlet, {static: true}) _footerRowOutlet: AnFooterRowOutlet;
+
+  /**
+   * The column definitions provided by the user that contain what the header, data, and footer cells should render for each column.
+   */
+  @ContentChildren(AnColumnDef, {descendants: true}) contentColumnDefs: QueryList<AnColumnDef>;
+
+  ngAfterContentChecked(){ // TODO remove tjis later
+    console.log(this.contentColumnDefs);
+  }
 
 
  ngOnInit(){
