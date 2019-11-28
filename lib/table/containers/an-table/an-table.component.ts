@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef, Inject, Attribute, ContentChi
 import { AnDataRowOutlet, AnHeaderRowOutlet, AnFooterRowOutlet } from 'lib/table/directives/outlet.directives';
 import { DOCUMENT } from '@angular/common';
 import { AnColumnDef } from 'lib/table/directives/column.directives';
+import { AnRowDef, AnHeaderRowDef, AnFooterRowDef } from 'lib/table/directives/row.directives';
 
 @Component({
     selector: 'table[an-table]',
     styleUrls: ['an-table.component.scss'],
     templateUrl: 'an-table.component.html'
 })
-export class AnTableComponent implements OnInit {
+export class AnTableComponent<T> implements OnInit {
     constructor( 
         @Inject(DOCUMENT) private _document: any, 
         private _elementRef:ElementRef,
@@ -29,8 +30,17 @@ export class AnTableComponent implements OnInit {
    */
   @ContentChildren(AnColumnDef, {descendants: true}) contentColumnDefs: QueryList<AnColumnDef>;
 
+  /** Set of data row definitions that were provided to the table as content children. */
+  @ContentChildren(AnRowDef, {descendants: true}) contentRowDefs: QueryList<AnRowDef<T>>;
+  /** Set of header row definitions that were provided to the table as content children. */
+  @ContentChildren(AnHeaderRowDef, {  descendants: true }) contentHeaderRowDefs: QueryList<AnHeaderRowDef>;
+  /** Set of footer row definitions that were provided to the table as content children. */
+  @ContentChildren(AnFooterRowDef, {  descendants: true  }) _contentFooterRowDefs: QueryList<AnFooterRowDef>;
+
+
   ngAfterContentChecked(){ // TODO remove tjis later
-    console.log(this.contentColumnDefs);
+    console.log(" column defintions ", this.contentColumnDefs);
+    console.log("row definitions ", this.contentRowDefs);
   }
 
 

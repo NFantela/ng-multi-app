@@ -9,9 +9,10 @@ import { AnHeaderRow, AnFooterRow, AnRow } from './components/row/row.components
 // directives
 import { AnDataRowOutlet, AnHeaderRowOutlet, AnFooterRowOutlet } from './directives/outlet.directives';
 import { AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef } from './directives/column.directives';
+import { AnHeaderRowDef, AnRowDef, AnFooterRowDef } from './directives/row.directives';
 
 
-const EXPORTS = [AnTableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef];
+const EXPORTS = [AnTableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, AnColumnDef ,   AnHeaderRow,   AnFooterRow,   AnRow, AnHeaderRowDef, AnRowDef, AnFooterRowDef];
 
 @NgModule({
     imports: [],
@@ -20,9 +21,6 @@ const EXPORTS = [AnTableComponent, AnCellDef, AnHeaderCellDef, AnFooterCellDef, 
         AnDataRowOutlet,
         AnHeaderRowOutlet,
         AnFooterRowOutlet,
-        AnHeaderRow,
-        AnFooterRow,
-        AnRow,
         ...EXPORTS
     ],
     exports: EXPORTS,

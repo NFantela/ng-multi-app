@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
             </ng-container>
 
             <tr an-header-row *anHeaderRowDef="displayedColumns"></tr>
-            <tr an-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+            <tr an-row *anRowDef="let row; columns: displayedColumns;"></tr> 
        </table>
         </div>
     `

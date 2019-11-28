@@ -23,7 +23,7 @@ export class AnFooterCellDef implements ICellDef {
   constructor(public template: TemplateRef<any>) {}
 }
 
- /*  Grabs group of column defeinitions (cell, header, footer) */
+ /*  Grabs group of column defeinitions (cell, header, footer) later will be extracted via extractCellTemplate from  BaseRowDef*/
 @Directive({
     selector: '[anColumnDef]'
 }) export class AnColumnDef {
