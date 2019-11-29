@@ -61,3 +61,10 @@
   <tr header-row *anHeaderRowDef="displayedColumns"></tr> <!-- anHeaderRowDef captures -->
   <tr row *anRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+# RENDER LOGIC
+
+  in table CoMPONENT -  ngAfterContentChecked(){
+      _cacheRowDefs() - Update the list of all available row definitions that can be used. 
+      _cacheColumnDefs()
+  }
