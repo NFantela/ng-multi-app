@@ -157,11 +157,11 @@ export class AnTableComponent<T> implements OnInit, AfterContentChecked {
 
     // Force re-render header/footer rows if the list of column definitions have changed..
     if (this._headerRowDefs.reduce(columnsDiffReducer, false)) {
-      this._forceRenderHeaderRows();
+      // this._forceRenderHeaderRows();
     }
 
     if (this._footerRowDefs.reduce(columnsDiffReducer, false)) {
-      this._forceRenderFooterRows();
+      // this._forceRenderFooterRows();
     }
   }
 
@@ -173,7 +173,7 @@ export class AnTableComponent<T> implements OnInit, AfterContentChecked {
   private _forceRenderDataRows() {
     this._dataDiffer.diff([]);
     this._rowOutlet.viewContainer.clear();
-    this.renderRows();
+    // this.renderRows();
   }
 
 }
