@@ -1,0 +1,15 @@
+@import '../utilities/index.scss';
+
+// Reusable List
+@mixin list-maker($cols:2){
+    list-style: none;
+    color:red;
+    li{
+      display: flex;
+      padding:em(12px);
+      .list-span{
+        display:inline-block;
+        margin:em(12px);
+      }
+    }
+  }

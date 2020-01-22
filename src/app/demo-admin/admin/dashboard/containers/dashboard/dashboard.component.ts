@@ -1,24 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'admin-dashboard',
+    styleUrls: ['dashboard.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-        <div>
-        <table simple-table role="presentation">
-                <caption>This is table caption </caption>
-
-                <ng-container simpleColumnDef="firstName"><!-- simpleColumnDef grabs view with header and cell definitions-->
-                    <th *simpleHeaderCellDef> <em>Name:</em> </th><!-- captures header cell definition -->
-                </ng-container>
-
-                <ng-container simpleColumnDef="email"><!-- simpleColumnDef grabs view with header and cell definitions-->
-                    <th *simpleHeaderCellDef> <em>E-mail:</em> </th><!-- captures header cell definition -->
-                </ng-container>
-
-                <!-- Borh header-row & row are components whose templaet is <ng-container anCellOutlet></ng-container>-->
-                <tr simple-header-row *anHeaderRowDef="displayedColumns"></tr> <!-- anHeaderRowDef captures -->
-        </table> 
-        </div>
+        <section class="home">
+        <h1> NGRX powered app home page</h1>
+            <article class="panel--centered">
+                <h3>Reusable list generated via scss mixin</h3>
+                <dashboard-list></dashboard-list>
+            </article>
+        </section>
     `
 })
 export class AdminDashboardComponent {

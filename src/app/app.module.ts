@@ -56,9 +56,9 @@ import { TimepickerModule } from 'lib/timepicker/timepicker-module';
       provide: ANGULAR_CALENDAR_CONFIG,
       useValue: {
         timespanLabels : {
-          daily : 'dnevno',
-          weekly: 'tjedno',
-          monthly : 'mjesecno'
+          daily : 'daily',
+          weekly: 'weekly',
+          monthly : 'monthly'
         },
         weekDayLabels: [
           {monday: 'pon'},

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminDashboardComponent } from './containers/dashboard/dashboard.component';
 
-import { SimpleTableModule } from 'lib/simple-table/simple-table.module';
+import { DashboardListComponent } from './components/dashboard-list/dashboard-list.component';
 
 // other modules
 
@@ -15,10 +15,9 @@ export const ROUTES: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        SimpleTableModule,
         RouterModule.forChild(ROUTES)
     ],
-    declarations: [AdminDashboardComponent],
+    declarations: [AdminDashboardComponent, DashboardListComponent],
     providers: []
 })
 export class AdminDashboardModule {}

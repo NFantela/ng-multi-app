@@ -1,0 +1,9 @@
+
+.home{
+    text-align: center;
+    [class^="panel"]{
+        max-width: 800px;
+        background-color: white;
+        margin:0 auto;
+    }
+}

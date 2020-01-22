@@ -2,18 +2,12 @@
     <h1> Welcome </h1>
     <h2> You can view a list of my reusable Angular Modules (Calendar & Timepicker) </h2>
 
-    <div class="panel--centered">
-        <h3>Or here is a link to NGRX povered Lazy loaded APP demo:</h3>
-        <a routerLink="demo-admin" class="btn btn--info">NGRX store admin APP</a>
-    </div>
-
-
     <hr />
     <div style="max-width:1000px; margin: 0 auto;" class="center-align">
                 <h2>Angular Calendar Demo</h2>
                 <p>Accepts multiple inputs & config options</p>
             <angular-calendar
-            [selectedView]="'week'"
+            [selectedView]="'month'"
             [loadingData]="loadingData" 
             [eventData]="events$ | async"
             (calendarDateChange)="handleDateChange($event)">
@@ -96,9 +90,13 @@
 
                 </div>
               </section>
-           
-    </div>
 
+      
+              <div class="ngrx-store-panel panel--centered">
+                  <h3>Or here is a link to NGRX povered Lazy loaded APP demo:</h3>
+                  <a routerLink="demo-admin" class="btn btn--info">NGRX store admin APP</a>
+              </div>
+    </div>
 
 
 
