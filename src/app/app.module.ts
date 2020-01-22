@@ -29,6 +29,11 @@ import { DemoAdminModule } from './demo-admin/demo-admin.module';
 import { AngularCalendarModule } from 'lib/angular-calendar/angular.calendar.module';
 import { ANGULAR_CALENDAR_CONFIG } from 'lib/angular-calendar/tokens/angular-calendar.config';
 import { TimepickerModule } from 'lib/timepicker/timepicker-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollProgressDemoModule } from 'lib/scroll-progress/scroll-progress.module';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -49,7 +54,10 @@ import { TimepickerModule } from 'lib/timepicker/timepicker-module';
     DemoAdminModule,
     AngularCalendarModule,
     TimepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ScrollProgressDemoModule,
+    MatProgressBarModule
   ],
   providers: [
     {

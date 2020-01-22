@@ -1,103 +1,132 @@
 <div class="home">
     <h1> Welcome </h1>
-    <h2> You can view a list of my reusable Angular Modules (Calendar & Timepicker) </h2>
+    <h2> You can view a list of my reusable Angular Modules (Calendar, Timepicker, Scroll progress bar) </h2>
 
     <hr />
     <div style="max-width:1000px; margin: 0 auto;" class="center-align">
-                <h2>Angular Calendar Demo</h2>
-                <p>Accepts multiple inputs & config options</p>
-            <angular-calendar
-            [selectedView]="'month'"
-            [loadingData]="loadingData" 
-            [eventData]="events$ | async"
+        <h2>Angular Calendar Demo</h2>
+        <p>Accepts multiple inputs & config options</p>
+        <angular-calendar [selectedView]="'month'" [loadingData]="loadingData" [eventData]="events$ | async"
             (calendarDateChange)="handleDateChange($event)">
-                    <angular-calendar-heading>
-                        <h3>Hello this is heading that is projected via directive</h3>
-                    </angular-calendar-heading>
+            <angular-calendar-heading>
+                <h3>Hello this is heading that is projected via directive</h3>
+            </angular-calendar-heading>
 
-                    <ng-template let-event>
-                            <div class="my-event">
-                                <h3>{{ event.eventName }}</h3>
-                                <img [src]="event.eventImg">
-                                <p>{{event.eventDescription}} </p>
-                            </div>
-                    </ng-template>
-                    
-                    <angular-calendar-footer>Some footer information</angular-calendar-footer>
-            </angular-calendar>
-
-            <section class="row">
-                    <h2>Hours input example</h2>
-                    <p>Connected to either reactive or regular input field. Accepts keyboard arrows input</p>
-                <h3>Reactive forms example</h3>
-                <div class="row-inputs">
-                  <div class="row-inputs__input">
-                      <label>
-                          hours
-                        <input 
-                        type="text" 
-                        timepicker="hours"
-                        [formControl]="hoursInput" 
-                        [timepickerFieldControl]="hoursInput"/>
-                        </label>
-                   </div>
-                   <div class="row-inputs__input">
-                      <label>
-                          Minutes
-                          <input 
-                            type="text" 
-                            timepicker="minutes"
-                            [formControl]="minutesInput" 
-                            [timepickerFieldControl]="minutesInput"/>
-                      </label>                     
-                   </div>
-                   <div class="row-inputs__input">
-                      <label>
-                          Seconds
-                           <input 
-                           type="number" 
-                           timepicker="seconds"
-                           [formControl]="secondsInput" 
-                           [timepickerFieldControl]="secondsInput"/>      
-                         </label>
-                   </div>
-
-
+            <ng-template let-event>
+                <div class="my-event">
+                    <h3>{{ event.eventName }}</h3>
+                    <img [src]="event.eventImg">
+                    <p>{{event.eventDescription}} </p>
                 </div>
-              </section>
-        
-              <section class="row">
-                <h3>Regular input fields</h3>
-                <div class="row-inputs">
-                    <div class="row-inputs__input">
-                        <input 
-                        type="text" 
-                        timepicker="hours" 
-                        value="12"/>
-                    </div>
-                    <div class="row-inputs__input">
-                        <input 
-                        type="number" 
-                        timepicker="minutes" 
-                        value="12"/>
-                    </div>
-                    <div class="row-inputs__input">
-                        <input 
-                        type="number" 
-                        timepicker="seconds" 
-                        value="12"/>
-                    </div>
+            </ng-template>
 
+            <angular-calendar-footer>Some footer information</angular-calendar-footer>
+        </angular-calendar>
+
+        <section class="row">
+            <h2>Hours input example</h2>
+            <p>Connected to either reactive or regular input field. Accepts keyboard arrows input</p>
+            <h3>Reactive forms example</h3>
+            <div class="row-inputs">
+                <div class="row-inputs__input">
+                    <label>
+                        hours
+                        <input type="text" timepicker="hours" [formControl]="hoursInput"
+                            [timepickerFieldControl]="hoursInput" />
+                    </label>
                 </div>
-              </section>
+                <div class="row-inputs__input">
+                    <label>
+                        Minutes
+                        <input type="text" timepicker="minutes" [formControl]="minutesInput"
+                            [timepickerFieldControl]="minutesInput" />
+                    </label>
+                </div>
+                <div class="row-inputs__input">
+                    <label>
+                        Seconds
+                        <input type="number" timepicker="seconds" [formControl]="secondsInput"
+                            [timepickerFieldControl]="secondsInput" />
+                    </label>
+                </div>
 
-      
-              <div class="ngrx-store-panel panel--centered">
-                  <h3>Or here is a link to NGRX povered Lazy loaded APP demo:</h3>
-                  <a routerLink="demo-admin" class="btn btn--info">NGRX store admin APP</a>
-              </div>
+
+            </div>
+        </section>
+
+        <section class="row">
+            <h3>Regular input fields</h3>
+            <div class="row-inputs">
+                <div class="row-inputs__input">
+                    <input type="text" timepicker="hours" value="12" />
+                </div>
+                <div class="row-inputs__input">
+                    <input type="number" timepicker="minutes" value="12" />
+                </div>
+                <div class="row-inputs__input">
+                    <input type="number" timepicker="seconds" value="12" />
+                </div>
+
+            </div>
+        </section>
+
+        <section class="row">
+            <h3>Optimized progress bar</h3>
+            <p><strong>Fully optimized</strong> - running outside Angular zone & Using RXJS animationFrameScheduler</p>
+            <p>Directive can be attached to any container element and subscribed to for progress values right in the template or in class</p>
+            <div class="scroll-wrap">
+                <mat-progress-bar mode="determinate" color="primary" [value]="scrollProgress.emitNewScroll | async">
+                </mat-progress-bar>
+    
+                <div class="custom-scroll-container" scroll-progress #scrollProgress="scrollProgress">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra condimentum libero id
+                        malesuada. Nulla convallis augue eu tempor efficitur. Proin eu efficitur nunc, vel finibus velit.
+                        Fusce vitae sem turpis. Quisque venenatis eu ex ac imperdiet. Suspendisse rhoncus condimentum
+                        tellus, sed euismod nibh rutrum non. Vestibulum ante ipsum primis in faucibus orci luctus et
+                        ultrices posuere cubilia Curae; Duis rhoncus sapien mauris, id sodales eros feugiat sed. Nullam ac
+                        felis non ligula ornare volutpat. Nulla vel vulputate diam, lacinia mollis lacus. Aenean a risus sed
+                        sem mollis vehicula. Nam posuere nulla eu eros efficitur, non accumsan lacus interdum. Integer enim
+                        urna, pharetra in dui ut, vulputate elementum nunc. Orci varius natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus. Praesent eu suscipit leo, sed vestibulum arcu. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra condimentum libero id
+                        malesuada. Nulla convallis augue eu tempor efficitur. Proin eu efficitur nunc, vel finibus velit.
+                        Fusce vitae sem turpis. Quisque venenatis eu ex ac imperdiet. Suspendisse rhoncus condimentum
+                        tellus, sed euismod nibh rutrum non. Vestibulum ante ipsum primis in faucibus orci luctus et
+                        ultrices posuere cubilia Curae; Duis rhoncus sapien mauris, id sodales eros feugiat sed. Nullam ac
+                        felis non ligula ornare volutpat. Nulla vel vulputate diam, lacinia mollis lacus. Aenean a risus sed
+                        sem mollis vehicula. Nam posuere nulla eu eros efficitur, non accumsan lacus interdum. Integer enim
+                        urna, pharetra in dui ut, vulputate elementum nunc. Orci varius natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus. Praesent eu suscipit leo, sed vestibulum arcu. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis viverra condimentum libero id
+                        malesuada. Nulla convallis augue eu tempor efficitur. Proin eu efficitur nunc, vel finibus velit.
+                        Fusce vitae sem turpis. Quisque venenatis eu ex ac imperdiet. Suspendisse rhoncus condimentum
+                        tellus, sed euismod nibh rutrum non. Vestibulum ante ipsum primis in faucibus orci luctus et
+                        ultrices posuere cubilia Curae; Duis rhoncus sapien mauris, id sodales eros feugiat sed. Nullam ac
+                        felis non ligula ornare volutpat. Nulla vel vulputate diam, lacinia mollis lacus. Aenean a risus sed
+                        sem mollis vehicula. Nam posuere nulla eu eros efficitur, non accumsan lacus interdum. Integer enim
+                        urna, pharetra in dui ut, vulputate elementum nunc. Orci varius natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus. Praesent eu suscipit leo, sed vestibulum arcu. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <div class="ngrx-store-panel panel--centered">
+            <h3>Or here is a link to NGRX povered Lazy loaded APP demo:</h3>
+            <a routerLink="demo-admin" class="btn btn--info">NGRX store admin APP</a>
+        </div>
     </div>
 
 
 
- </div>
+</div>
