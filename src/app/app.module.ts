@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollProgressDemoModule } from 'lib/scroll-progress/scroll-progress.module';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HoldableDirModule } from 'lib/holdable/holdable.module';
 
 
 
@@ -56,7 +57,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ScrollProgressDemoModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    HoldableDirModule
   ],
   providers: [
     {

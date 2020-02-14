@@ -126,6 +126,23 @@
         </div>
 
         <div class="ngrx-store-panel panel--centered">
+            <h3>Holdable Directive Example</h3>
+            <p>Hold mouse pressed down to fill progress bar - e.g. can be used on delete btn s</p>
+            <p>Events on host element run outside Angular Zone for max performance</p>
+            <button type="button" class="btn btn--success" holdable #holdableDir="holdableDir">Hold me!</button>
+            <div class="scroll-wrap">
+                <mat-progress-bar 
+                    mode="determinate" color="primary" [value]="holdableDir.intervalValues | async">
+                </mat-progress-bar>  
+                <p>
+                    <progress max="100" [value]="holdableDir.intervalValues | async"></progress>
+
+                </p>
+            </div>
+
+        </div>
+
+        <div class="ngrx-store-panel panel--centered">
             <h3>Or here is a link to NGRX povered Lazy loaded APP demo:</h3>
             <a routerLink="demo-admin" class="btn btn--info">NGRX store admin APP</a>
         </div>
