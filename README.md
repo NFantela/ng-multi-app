@@ -40,7 +40,7 @@
 -- connects dynamically created timepicker to input field or form control
 -- can be used for hours, minutes or seconds
 -- accepts keyboard UP | DOWN arrow inputs
--- @Input()-s 
+-- Input()-s 
     type: 'hours' | 'minutes' | 'seconds',
     timepickerFieldControl - if reactive forms are used
 
@@ -52,3 +52,16 @@
             [formControl]="hoursInput" 
             [timepickerFieldControl]="hoursInput"/>
     </label>
+
+#4 Optimized progress bar (outside ngZone)
+-- exportable Directive that can be then passed to other element e.g. progress bar
+        <div class="custom-scroll-container" scroll-progress #scrollProgress="scrollProgress">...</div>
+        <mat-progress-bar mode="determinate" color="primary" [value]="scrollProgress.emitNewScroll | async"> </mat-progress-bar>
+        
+#5 Holdable directive (outside ngZone)
+-- Hold mouse pressed down to fill progress bar - e.g. can be used on delete btn s
+<button type="button" class="btn btn--success" holdable #holdableDir="holdableDir">Hold me!</button>
+<mat-progress-bar 
+    mode="determinate" color="primary" [value]="holdableDir.intervalValues | async">
+</mat-progress-bar>  
+    
