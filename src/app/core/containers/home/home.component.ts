@@ -65,4 +65,9 @@ export class HomeComponent implements OnInit {
     minutesInput = new FormControl('22');
     secondsInput = new FormControl(54);
 
+
+    logItem(item:any, action:'check' | 'delete'){
+        console.log(action, item);
+    }
+
 }

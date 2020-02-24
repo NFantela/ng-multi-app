@@ -30,5 +30,28 @@
             overflow-y: scroll;
         }
     }
-
+    ul{
+        list-style:none;
+        background-color: white;
+        li{
+            display: flex;
+            padding:.4em;
+            border-bottom: 1px dotted gray;
+            position:relative;
+        }
+    }
+    .hover-tmpl{
+        position: absolute;
+        right:0;
+        top:0;
+        z-index: 10;
+        width: 100px;
+        display:flex;
+        justify-content: space-evenly;
+        span{
+            display:inline-block;
+            cursor: pointer;
+            padding:.2em;
+        }
+    }
 }

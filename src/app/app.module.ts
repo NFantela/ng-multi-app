@@ -33,6 +33,7 @@ import { ScrollProgressDemoModule } from 'lib/scroll-progress/scroll-progress.mo
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HoldableDirModule } from 'lib/holdable/holdable.module';
+import { OnHoverTemplateModule } from 'lib/on-hover-template/on-hover-template.module';
 
 
 
@@ -58,7 +59,8 @@ import { HoldableDirModule } from 'lib/holdable/holdable.module';
     BrowserAnimationsModule,
     ScrollProgressDemoModule,
     MatProgressBarModule,
-    HoldableDirModule
+    HoldableDirModule,
+    OnHoverTemplateModule
   ],
   providers: [
     {

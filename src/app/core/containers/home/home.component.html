@@ -24,6 +24,30 @@
         </angular-calendar>
 
         <section class="row">
+            <div class="ngrx-store-panel panel--centered">
+                <h3>Project template on mouseenter directive</h3>
+                <p>Takes in <ng-template></ng-template> and projects it into parent container viewContainer. Also moves
+                the element in DOM tree from outside the parent el to its children.</p>
+                <p>On mouseleave destroys template. Event handlers can be normaly fired e.g. this ones just log context var item</p>
+                    <ul *ngIf="events$ | async as events">
+                        <li 
+                            *ngFor="let event of events.calendarData"
+                            onHoverTemplate
+                            [contextVar]="event"
+                            [hostRelative]="true"
+                            [passedTemplate]="eventDataToShowOnHover">{{ event?.item.eventName }} 
+                        </li>
+                    </ul>
+                    <ng-template let-event #eventDataToShowOnHover>
+                        <div class="hover-tmpl">
+                            <span (click)="logItem(event, 'check')">&#9748;</span>
+                            <span (click)="logItem(event, 'delete')">&#9940;</span>
+                        </div>
+                    </ng-template>
+            </div>
+        </section>
+
+        <section class="row">
             <h2>Hours input example</h2>
             <p>Connected to either reactive or regular input field. Accepts keyboard arrows input</p>
             <h3>Reactive forms example</h3>
