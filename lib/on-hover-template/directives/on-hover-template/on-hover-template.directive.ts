@@ -1,5 +1,7 @@
-import { Directive, ElementRef, ViewContainerRef, OnDestroy, Input, TemplateRef, OnInit, EmbeddedViewRef } from '@angular/core';
+import { Directive, ElementRef, ViewContainerRef, OnDestroy, Input, TemplateRef, OnInit, EmbeddedViewRef, NgZone } from '@angular/core';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { ScrollDispatcher } from '@angular/cdk/scrolling';
+import { Subscription } from 'rxjs';
 
 /** Options used to bind passive event listeners. */
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
@@ -20,12 +22,16 @@ export type onHoverPositionOptions = 'start' | 'end';
         private _elementRef: ElementRef<HTMLElement>,
         private _viewContainerRef: ViewContainerRef,
         private _platform: Platform,
+        private _scrollDispatcher: ScrollDispatcher,
+        private _ngZone:NgZone
     ) { }
 
     /** Manually-bound passive event listeners. */
     private _passiveListeners = new Map<string, EventListenerOrEventListenerObject>();
 
     private _createdEmbeddedview: EmbeddedViewRef<any>;
+    /** Subscription to CDK s scroll dispatcher */
+    private _scrollSub:Subscription = Subscription.EMPTY;
 
     @Input()
     passedTemplate: TemplateRef<any>;
@@ -50,6 +56,9 @@ export type onHoverPositionOptions = 'start' | 'end';
 
     ngOnInit() {
         this._setUpEvents();
+        this._scrollSub = this._scrollDispatcher.scrolled(0).subscribe(() => {
+            return this._createdEmbeddedview && this._ngZone.run(() => this.hideTemplate()) 
+        });
     }
 
     ngOnDestroy() {
@@ -57,7 +66,7 @@ export type onHoverPositionOptions = 'start' | 'end';
             this.nativeEl.removeEventListener(event, listener, passiveListenerOptions);
         });
         this._passiveListeners.clear();
-
+        this._scrollSub.unsubscribe();
     }
 
     /** Binds events to directive s trigger element */
@@ -106,7 +115,7 @@ export type onHoverPositionOptions = 'start' | 'end';
 
     /** Destroys created embedded view */
     hideTemplate() {
-        let index = this._viewContainerRef.indexOf(this._createdEmbeddedview);
+        let index = this._createdEmbeddedview ? this._viewContainerRef.indexOf(this._createdEmbeddedview) : -1;
         if (index !== -1) {
             this._viewContainerRef.remove(index);
             this._createdEmbeddedview = null;
