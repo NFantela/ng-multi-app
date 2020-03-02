@@ -7,6 +7,7 @@
 -- Has separate routed store dashboard app
 
 # SCSS uses SMACSS and BEM methodology
+-- could be augmented with mixin importing from reusable modules if needed.
 
 # 2 Calendar
 -- has ANGULAR_CALENDAR_CONFIG config options for module in which it is imported
