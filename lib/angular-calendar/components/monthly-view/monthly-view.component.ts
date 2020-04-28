@@ -29,7 +29,7 @@ export class MonthlyViewComponent {
 
     @Input()
     set eventData(evData:AngularCalendarData<any>){
-        if(evData){
+        if(evData && this._dateInformation){
             this._generateDaysCells(this._dateInformation, evData)
         }
     }

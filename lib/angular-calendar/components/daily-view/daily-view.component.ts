@@ -24,7 +24,7 @@ export class DailyViewComponent {
 
     @Input()
     set eventData(evData:AngularCalendarData<any>){
-        if(evData){
+        if(evData && this._dateInformation){
             this._generateHourItems(this._dateInformation, evData);
         }
     }

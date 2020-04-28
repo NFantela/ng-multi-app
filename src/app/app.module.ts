@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 // ngrx store
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
@@ -47,7 +47,7 @@ import { OnHoverTemplateModule } from 'lib/on-hover-template/on-hover-template.m
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot(reducers, { metaReducers }),
   //  EffectsModule.forRoot(effects),
-    StoreRouterConnectingModule.forRoot(),
+  StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Store DevTools',
       logOnly: environment.production
